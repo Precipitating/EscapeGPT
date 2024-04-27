@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 21c167d4292db384db58ecc96a7158e7
+guid: 5ba0aa35f8b67c54c9be9d0c965f98bf
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Standard Walk
+      name: Left Strafe Walk
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 35
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
