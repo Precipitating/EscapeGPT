@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,7 +19,9 @@ public class Guard : MonoBehaviour
     // get refs 
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
-    [SerializeField] List<GameObject> waypoints;
+    [SerializeField] GameObject[] waypoints;
+    [SerializeField] AudioClip[] footStepSound;
+    [SerializeField] AudioSource audioSource;
 
     State guardState = State.IDLE;
     int patrolDest = 0;
@@ -44,8 +47,6 @@ public class Guard : MonoBehaviour
 
     private void Setup()
     {
-
-
         guardState = State.PATROL;
         agent.SetDestination(waypoints[patrolDest].transform.position);
     }
@@ -76,6 +77,11 @@ public class Guard : MonoBehaviour
 
 
     
+    }
+
+    public void Footstep()
+    {
+        audioSource.PlayOneShot(footStepSound[UnityEngine.Random.Range(0, footStepSound.Length)]);
     }
 
 
