@@ -20,8 +20,7 @@ public class Guard : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
     [SerializeField] GameObject[] waypoints;
-    [SerializeField] AudioClip[] footStepSound;
-    [SerializeField] AudioSource audioSource;
+
 
     State guardState = State.IDLE;
     int patrolDest = 0;
@@ -79,10 +78,6 @@ public class Guard : MonoBehaviour
     
     }
 
-    public void Footstep()
-    {
-        audioSource.PlayOneShot(footStepSound[UnityEngine.Random.Range(0, footStepSound.Length)]);
-    }
 
 
 
