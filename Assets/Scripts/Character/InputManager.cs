@@ -11,10 +11,13 @@ public class InputManager : MonoBehaviour
     public Vector2 Look { get; private set; }
     public bool Run { get; private set; }
 
+    public bool ToggleMic { get; private set; }
+
     private InputActionMap currentMap;
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction runAction;
+    private InputAction toggleMicAction;
 
     private void Awake()
     {
@@ -23,14 +26,17 @@ public class InputManager : MonoBehaviour
         moveAction = currentMap.FindAction("Move");
         lookAction = currentMap.FindAction("Look");
         runAction = currentMap.FindAction("Run");
+        toggleMicAction = currentMap.FindAction("ToggleMic");
 
         moveAction.performed += onMove;
         lookAction.performed += onLook;
         runAction.performed += onRun;
+        toggleMicAction.performed += onToggleMic;
 
         moveAction.canceled += onMove;
         lookAction.canceled += onLook;
         runAction.canceled += onRun;
+        toggleMicAction.canceled += onToggleMic;
 
 
     }
@@ -51,6 +57,10 @@ public class InputManager : MonoBehaviour
     private void onRun(InputAction.CallbackContext context)
     {
         Run = context.ReadValueAsButton();
+    }
+    private void onToggleMic(InputAction.CallbackContext context)
+    {
+        ToggleMic = context.ReadValueAsButton();
     }
 
     private void OnEnable()

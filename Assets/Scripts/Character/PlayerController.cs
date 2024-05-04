@@ -19,6 +19,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float camBottomLimit = 70f;
     [SerializeField] private float mouseSens = 21.9f;
 
+    [SerializeField] private VoskSpeechToText vosk;
+    [SerializeField] private VoiceProcessor voiceProcessor;
+
 
     private Rigidbody playerRigBody;
     private InputManager inputManager;
@@ -92,6 +95,18 @@ public class CharacterController : MonoBehaviour
 
 
 
+    }
+
+    private void Update()
+    {
+        if (inputManager.ToggleMic)
+        {
+            if (!voiceProcessor.IsRecording)
+            {
+               // Debug.Log("Mic toggled");
+                vosk.ToggleRecording();
+            }
+        }
     }
 
     private void FixedUpdate()

@@ -21,7 +21,7 @@ public class VoskSpeechToText : MonoBehaviour
 
 	public VoiceProcessor VoiceProcessor;
 	[Tooltip("The Max number of alternatives that will be processed.")]
-	public int MaxAlternatives = 3;
+	public int MaxAlternatives = 0;
 
 	[Tooltip("How long should we record before restarting?")]
 	public float MaxRecordLength = 5;
@@ -98,7 +98,7 @@ public class VoskSpeechToText : MonoBehaviour
 	/// <param name="modelPath">The path to the model folder relative to StreamingAssets. If the path has a .zip ending, it will be decompressed into the application data persistent folder.</param>
 	/// <param name="startMicrophone">"Should the microphone after vosk initializes?</param>
 	/// <param name="maxAlternatives">The maximum number of alternative phrases detected</param>
-	public void StartVoskStt(List<string> keyPhrases = null, string modelPath = default, bool startMicrophone = false, int maxAlternatives = 3)
+	public void StartVoskStt(List<string> keyPhrases = null, string modelPath = default, bool startMicrophone = false, int maxAlternatives = 1)
 	{
 		if (_isInitializing)
 		{
@@ -149,7 +149,7 @@ public class VoskSpeechToText : MonoBehaviour
 		_isInitializing = false;
 		_didInit = true;
 
-		ToggleRecording();
+		//ToggleRecording();
 	}
 
 	//Translates the KeyPhraseses into a json array and appends the `[unk]` keyword at the end to tell vosk to filter other phrases.
@@ -256,17 +256,17 @@ public class VoskSpeechToText : MonoBehaviour
 	//Can be called from a script or a GUI button to start detection.
 	public void ToggleRecording()
 	{
-		Debug.Log("Toogle Recording");
+		//Debug.Log("Toogle Recording");
 		if (!VoiceProcessor.IsRecording)
 		{
-			Debug.Log("Start Recording");
+			//Debug.Log("Start Recording");
 			_running = true;
 			VoiceProcessor.StartRecording();
     	                Task.Run(ThreadedWork).ConfigureAwait(false);
 		}
 		else
 		{
-			Debug.Log("Stop Recording");
+			//Debug.Log("Stop Recording");
 			_running = false;
 			VoiceProcessor.StopRecording();
 		}
@@ -290,7 +290,7 @@ public class VoskSpeechToText : MonoBehaviour
 	//Callback from the voice processor when recording stops
 	private void VoiceProcessorOnOnRecordingStop()
 	{
-                Debug.Log("Stopped");
+                //Debug.Log("Stopped");
 	}
 
 	//Feeds the autio logic into the vosk recorgnizer
