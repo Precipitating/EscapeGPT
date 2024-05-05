@@ -6,7 +6,7 @@ using UnityEngine;
 public class ResultReceiver : MonoBehaviour
 {
     [SerializeField] VoskSpeechToText VoskSpeechToText;
-    public static event Action OnGuardHear;
+    public static event Action<string> OnGuardHear;
 
     public RecognizedPhrase[] Phrases;
 
@@ -19,7 +19,7 @@ public class ResultReceiver : MonoBehaviour
     private void OnTranscriptionResult(string obj)
     {
         Debug.Log(JSONConverter(obj));
-        OnGuardHear?.Invoke( );
+        OnGuardHear?.Invoke(JSONConverter(obj));
         VoskSpeechToText.ToggleRecording();
     }
 

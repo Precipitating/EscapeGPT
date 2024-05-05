@@ -12,7 +12,6 @@ public class Guard : MonoBehaviour
     {
         IDLE,
         PATROL,
-        CONVERSING,
         ATTACKING
     }
     
@@ -28,12 +27,12 @@ public class Guard : MonoBehaviour
 
     private void OnEnable()
     {
-        ResultReceiver.OnGuardHear += () => { ChangeState(State.CONVERSING); };
+        ChatGPTReceiver.onChatGPTResult += Converse;
     }
 
     private void OnDisable()
     {
-        ResultReceiver.OnGuardHear -= () => { ChangeState(State.CONVERSING); };
+        ChatGPTReceiver.onChatGPTResult -= Converse;
     }
 
 
@@ -52,7 +51,6 @@ public class Guard : MonoBehaviour
         {
             case State.IDLE: Setup(); break;
             case State.PATROL: Patrol(); break;
-            case State.CONVERSING: Converse(); break;
             case State.ATTACKING: Attack(); break;
         }
     }
@@ -80,13 +78,15 @@ public class Guard : MonoBehaviour
         }
     }
 
-    private void Converse()
+    private void Converse(string chatGPTResult)
     {
-
         agent.isStopped = true;
-        Debug.Log("Conversing");
+        transform.LookAt(characterPosition);
+
+        // do work
+        Debug.Log(chatGPTResult);
+
         agent.isStopped = false;
-        ChangeState(State.PATROL);
 
 
 

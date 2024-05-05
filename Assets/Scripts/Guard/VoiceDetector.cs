@@ -7,7 +7,7 @@ public class VoiceDetected : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private int hearingDistance = 10;
-    public static event Action OnEnemyHear;
+    public static event Action<string> OnEnemyHear;
 
     private void OnEnable()
     {
@@ -18,11 +18,11 @@ public class VoiceDetected : MonoBehaviour
     {
         ResultReceiver.OnGuardHear -= EnemyVoiceAction;
     }
-    void EnemyVoiceAction()
+    void EnemyVoiceAction(string transcribeResult)
     {
         if (Vector3.Distance(player.transform.position, this.transform.position) < hearingDistance)
         {
-            OnEnemyHear?.Invoke();
+            OnEnemyHear?.Invoke(transcribeResult);
             Debug.Log("Enemy can hear this");
 
         }

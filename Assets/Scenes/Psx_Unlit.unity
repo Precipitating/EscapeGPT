@@ -6799,6 +6799,8 @@ GameObject:
   - component: {fileID: 997534797}
   - component: {fileID: 997534798}
   - component: {fileID: 997534799}
+  - component: {fileID: 997534800}
+  - component: {fileID: 997534801}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -6860,6 +6862,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1023819136}
   - {fileID: 1697043150}
+  characterPosition: {fileID: 917029128}
 --- !u!195 &997534796
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7010,6 +7013,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VoskSpeechToText: {fileID: 917029135}
+--- !u!114 &997534800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997534792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c249e0ee491bb4686ae67b0c607122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 917029127}
+  hearingDistance: 10
+--- !u!114 &997534801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997534792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae88d973c365b7145b340e57397d77e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guardRoleplayPrompt: Respond with 1 if you find my words insulting,derogatory,
+    offensive or anything similar to that. Anything else respond with 0.
 --- !u!1001 &1004178053
 PrefabInstance:
   m_ObjectHideFlags: 0
