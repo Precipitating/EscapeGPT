@@ -6017,6 +6017,8 @@ MonoBehaviour:
   camUpperLimit: -40
   camBottomLimit: 70
   mouseSens: 21.9
+  vosk: {fileID: 917029135}
+  voiceProcessor: {fileID: 917029136}
 --- !u!114 &917029134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6062,7 +6064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModelPath: vosk-model-small-en-us-0.15.zip
   VoiceProcessor: {fileID: 917029136}
-  MaxAlternatives: 3
+  MaxAlternatives: 1
   MaxRecordLength: 5
   AutoStart: 1
   KeyPhrases: []
@@ -6796,6 +6798,7 @@ GameObject:
   - component: {fileID: 997534796}
   - component: {fileID: 997534797}
   - component: {fileID: 997534798}
+  - component: {fileID: 997534799}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -6994,6 +6997,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4693b30bf53181a439bbba85b1398eb7, type: 3}
   - {fileID: 8300000, guid: ce2f54eb2b05d4c448ff59234dd46326, type: 3}
   audioSource: {fileID: 997534797}
+--- !u!114 &997534799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997534792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1a60d3174a7954fb9a596ab09830f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VoskSpeechToText: {fileID: 917029135}
 --- !u!1001 &1004178053
 PrefabInstance:
   m_ObjectHideFlags: 0

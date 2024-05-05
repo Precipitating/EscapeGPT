@@ -15,15 +15,28 @@ public class Guard : MonoBehaviour
         CONVERSING,
         ATTACKING
     }
-
+    
     // get refs 
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
     [SerializeField] GameObject[] waypoints;
+    [SerializeField] Transform characterPosition;
 
 
     State guardState = State.IDLE;
     int patrolDest = 0;
+
+    private void OnEnable()
+    {
+        ResultReceiver.OnGuardHear += () => { ChangeState(State.CONVERSING); };
+    }
+
+    private void OnDisable()
+    {
+        ResultReceiver.OnGuardHear -= () => { ChangeState(State.CONVERSING); };
+    }
+
+
 
     private void OnValidate()
     {
@@ -70,12 +83,24 @@ public class Guard : MonoBehaviour
     private void Converse()
     {
 
+        agent.isStopped = true;
+        Debug.Log("Conversing");
+        agent.isStopped = false;
+        ChangeState(State.PATROL);
+
+
+
     }
     private void Attack()
     {
 
 
     
+    }
+
+    private void ChangeState(State state)
+    {
+        guardState = state;
     }
 
 

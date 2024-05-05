@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class ResultReceiver : MonoBehaviour
 {
     [SerializeField] VoskSpeechToText VoskSpeechToText;
+    public static event Action OnGuardHear;
+
     public RecognizedPhrase[] Phrases;
 
     private void Awake()
@@ -16,6 +19,7 @@ public class ResultReceiver : MonoBehaviour
     private void OnTranscriptionResult(string obj)
     {
         Debug.Log(JSONConverter(obj));
+        OnGuardHear?.Invoke( );
         VoskSpeechToText.ToggleRecording();
     }
 

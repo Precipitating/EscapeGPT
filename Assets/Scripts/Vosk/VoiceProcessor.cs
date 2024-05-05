@@ -133,7 +133,11 @@ public class VoiceProcessor : MonoBehaviour
     {
         Devices = new List<string>();
         foreach (var device in Microphone.devices)
+        {
             Devices.Add(device);
+            Debug.Log(device);
+        }
+
 
         if (Devices == null || Devices.Count == 0)
         {
