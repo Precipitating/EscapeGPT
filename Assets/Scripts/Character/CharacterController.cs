@@ -22,6 +22,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private VoskSpeechToText vosk;
     [SerializeField] private VoiceProcessor voiceProcessor;
 
+   
+
 
     private Rigidbody playerRigBody;
     private InputManager inputManager;
@@ -53,6 +55,7 @@ public class CharacterController : MonoBehaviour
 
     }
 
+    // force based movement
     private void Move()
     {
         if (!hasAnimator) return;
@@ -78,6 +81,7 @@ public class CharacterController : MonoBehaviour
 
     }
 
+    // camera movement with the y axis clamped
     private void CameraMove()
     {
         if (!hasAnimator) return;
@@ -99,11 +103,11 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
+        // handle mic toggling
         if (inputManager.ToggleMic)
         {
             if (!voiceProcessor.IsRecording)
             {
-               // Debug.Log("Mic toggled");
                 vosk.ToggleRecording();
             }
         }

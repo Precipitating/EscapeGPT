@@ -20,6 +20,8 @@ public class Guard : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] GameObject[] waypoints;
     [SerializeField] Transform characterPosition;
+    [SerializeField] int angerValue = 0;
+    [SerializeField] const int maxAnger = 3;
 
 
     State guardState = State.IDLE;
@@ -83,8 +85,21 @@ public class Guard : MonoBehaviour
         agent.isStopped = true;
         transform.LookAt(characterPosition);
 
-        // do work
-        Debug.Log(chatGPTResult);
+        if (chatGPTResult == "1")
+        {
+            if (angerValue > maxAnger)
+            {
+                guardState = State.ATTACKING;
+            }
+            else
+            {
+                ++angerValue;
+            }
+        }
+        else
+        {
+
+        }
 
         agent.isStopped = false;
 

@@ -77,9 +77,12 @@ public class VoskSpeechToText : MonoBehaviour
 	//Thread safe queue of resuts
 	private readonly ConcurrentQueue<string> _threadedResultQueue = new ConcurrentQueue<string>();
 
+    // Send a event when vosk is listening/stop listening.
+    public static event Action onToggleMic;
 
 
-	static readonly ProfilerMarker voskRecognizerCreateMarker = new ProfilerMarker("VoskRecognizer.Create");
+
+    static readonly ProfilerMarker voskRecognizerCreateMarker = new ProfilerMarker("VoskRecognizer.Create");
 	static readonly ProfilerMarker voskRecognizerReadMarker = new ProfilerMarker("VoskRecognizer.AcceptWaveform");
 
 	//If Auto start is enabled, starts vosk speech to text.
@@ -256,7 +259,8 @@ public class VoskSpeechToText : MonoBehaviour
 	//Can be called from a script or a GUI button to start detection.
 	public void ToggleRecording()
 	{
-		//Debug.Log("Toogle Recording");
+		onToggleMic?.Invoke();
+
 		if (!VoiceProcessor.IsRecording)
 		{
 			//Debug.Log("Start Recording");
