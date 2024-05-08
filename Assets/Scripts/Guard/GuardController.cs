@@ -8,7 +8,7 @@ using UnityEngine.AI;
 
 public class Guard : MonoBehaviour
 {
-    enum State
+    public enum State
     {
         IDLE,
         PATROL,
@@ -16,12 +16,15 @@ public class Guard : MonoBehaviour
     }
     
     // get refs 
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animator animator;
-    [SerializeField] GameObject[] waypoints;
-    [SerializeField] Transform characterPosition;
-    [SerializeField] int angerValue = 0;
-    [SerializeField] const int maxAnger = 3;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject[] waypoints;
+    [SerializeField] private Transform characterPosition;
+    [SerializeField] private Transform leverPosition;
+    [SerializeField] private int angerValue = 0;
+    [SerializeField] private const int maxAnger = 3;
+    [SerializeField] private MeshRenderer sheathedSword;
+    [SerializeField] private MeshRenderer unsheathedSword;
 
 
     State guardState = State.IDLE;
@@ -49,6 +52,17 @@ public class Guard : MonoBehaviour
 
     void Update()
     {
+        if (agent.hasPath)
+        {
+            animator.SetFloat("Y Velocity", agent.velocity.magnitude);
+
+        }
+        else
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", 0);
+        }
+
         switch (guardState)
         {
             case State.IDLE: Setup(); break;
@@ -65,31 +79,23 @@ public class Guard : MonoBehaviour
 
     private void Patrol()
     {
-        if (agent.hasPath)
+        if (!agent.hasPath || agent.remainingDistance < 0.1f)
         {
-            animator.SetFloat("Y Velocity", agent.velocity.magnitude);
-
-        }
-        else
-        {
-            animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", 0);
             patrolDest = patrolDest == 0 ? 1 : 0;
             agent.SetDestination(waypoints[patrolDest].transform.position);
-
         }
     }
 
     private void Converse(string chatGPTResult)
     {
-        agent.isStopped = true;
-        transform.LookAt(characterPosition);
 
         if (chatGPTResult == "1")
         {
-            if (angerValue > maxAnger)
+            if (angerValue >= maxAnger)
             {
-                guardState = State.ATTACKING;
+                ChangeState(State.ATTACKING);
+                agent.speed *= 2;
+                
             }
             else
             {
@@ -98,23 +104,46 @@ public class Guard : MonoBehaviour
         }
         else
         {
-
+            // pay no mind and play audio
         }
-
-        agent.isStopped = false;
-
 
 
     }
     private void Attack()
     {
+        // check if player is accessible 
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(characterPosition.position, path);
+        if (path.status == NavMeshPathStatus.PathPartial || path.status ==  NavMeshPathStatus.PathInvalid)
+        {
+            // open lever to access player
+            agent.destination = leverPosition.position;
+
+        }
+        else
+        {
+            // path valid, ATTACK
+            agent.destination = characterPosition.position;
+
+            // if close, play sword swing
+        }
+
         
     
     }
 
-    private void ChangeState(State state)
+    public void ChangeState(State state)
     {
         guardState = state;
+    }
+
+    public State GetState()
+    {
+        return guardState;
+    }
+    public void SetStoppingDistance(int distance)
+    {
+        agent.stoppingDistance = distance;
     }
 
 
