@@ -23,12 +23,12 @@ public class ChatGPTReceiver : MonoBehaviour
     }
     private void OnEnable()
     {
-        ResultReceiver.OnGuardHear += AskChatGPT;
+        ResultReceiver.onGuardHear += AskChatGPT;
     }
 
     private void OnDisable()
     {
-        ResultReceiver.OnGuardHear -= AskChatGPT;
+        ResultReceiver.onGuardHear -= AskChatGPT;
     }
 
     private void RoleSetter(string prompt)

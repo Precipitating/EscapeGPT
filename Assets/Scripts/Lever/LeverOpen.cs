@@ -19,7 +19,7 @@ public class LeverOpen : MonoBehaviour
             {
                 doorAnimator.Play("GateOpen");
                 isOpen = true;
-                guardScript.SetStoppingDistance(2);
+                guardScript.SetStoppingDistance(guardScript.GetAttackDistance());
             }
         }
         

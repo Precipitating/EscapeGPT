@@ -1,3 +1,4 @@
+using PrimeTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,13 +15,16 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float animBlendSpeed = 8.9f;
 
     [SerializeField] private Transform cameraRoot;
-    [SerializeField] private Transform camera;
+    [SerializeField] private Transform cameraTransform;
     [SerializeField] private float camUpperLimit = -40f;
     [SerializeField] private float camBottomLimit = 70f;
     [SerializeField] private float mouseSens = 21.9f;
 
     [SerializeField] private VoskSpeechToText vosk;
     [SerializeField] private VoiceProcessor voiceProcessor;
+
+    [SerializeField] private float cameraShakeIntensity = 1f;
+    [SerializeField] private float cameraShakeDuration = 0.5f;
 
    
 
@@ -43,6 +47,16 @@ public class CharacterController : MonoBehaviour
     private float xRotation;
 
 
+    private void OnEnable()
+    {
+        SwordAttack.onPlayerHit += OnHit;
+    }
+
+    private void OnDisable()
+    {
+        SwordAttack.onPlayerHit -= OnHit;
+
+    }
 
     private void Start()
     {
@@ -87,12 +101,12 @@ public class CharacterController : MonoBehaviour
         if (!hasAnimator) return;
         var mouseX = inputManager.Look.x;
         var mouseY = inputManager.Look.y;
-        camera.position = cameraRoot.position;
+        cameraTransform.position = cameraRoot.position;
 
         xRotation -= mouseY * mouseSens * Time.deltaTime;
         xRotation = Mathf.Clamp(xRotation, camUpperLimit, camBottomLimit);
 
-        camera.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up, mouseX * mouseSens * Time.deltaTime);
 
 
@@ -123,6 +137,13 @@ public class CharacterController : MonoBehaviour
         CameraMove();
     }
 
+
+    // on player hit, shake camera and lower HP
+    private void OnHit()
+    {
+
+        Tween.ShakeLocalPosition(cameraRoot, new Vector3(cameraShakeIntensity, cameraShakeIntensity, cameraShakeIntensity), cameraShakeDuration);
+    }
 
 
 
