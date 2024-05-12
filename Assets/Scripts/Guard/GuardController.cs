@@ -6,40 +6,45 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Guard : MonoBehaviour
+public class Guard : MonoBehaviour, HumanInterface
 {
     public enum State
     {
         IDLE,
         PATROL,
-        ATTACKING
+        ATTACKING,
+        DEAD
     }
-    
+
     // get refs 
+    [SerializeField] private int hp = 100;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject[] waypoints;
 
+    // transforms for guard interest points (navigation)
     [SerializeField] private Transform characterPosition;
     [SerializeField] private Transform leverPosition;
 
+    // anger value determined by player speech
     [SerializeField] private int angerValue = 0;
     [SerializeField] private const int maxAnger = 3;
 
+    // sword
     [SerializeField] private MeshRenderer sheathedSword;
     [SerializeField] private MeshRenderer unsheathedSword;
 
+    // attack
     [SerializeField] private int attackAnimations;
-
     [SerializeField] private int attackDistance = 1;
+    [SerializeField] private bool isAttacking = false;
 
-    [SerializeField] bool isAttacking = false;
-
-    bool canDamage = false;
-
+    private bool canDamage = false;
 
 
     State guardState = State.IDLE;
+
+    // for patrolling, the number represents patrol waypoints in a list
     int patrolDest = 0;
 
     private void OnEnable()
@@ -64,6 +69,8 @@ public class Guard : MonoBehaviour
 
     void Update()
     {
+
+        // apply correct blend tree animation for guard walk/run (speed dependent)
         if (agent.hasPath)
         {
             animator.SetFloat("Y Velocity", agent.velocity.magnitude);
@@ -80,6 +87,7 @@ public class Guard : MonoBehaviour
             case State.IDLE: Setup(); break;
             case State.PATROL: Patrol(); break;
             case State.ATTACKING: Attack(); break;
+            case State.DEAD: Die(); break;
         }
     }
 
@@ -93,6 +101,7 @@ public class Guard : MonoBehaviour
     {
         if (!agent.hasPath || agent.remainingDistance < 0.1f)
         {
+            // keep switching back and forth waypoints which there is currently 2 waypoints
             patrolDest = patrolDest == 0 ? 1 : 0;
             agent.SetDestination(waypoints[patrolDest].transform.position);
         }
@@ -100,11 +109,12 @@ public class Guard : MonoBehaviour
 
     private void Converse(string chatGPTResult)
     {
-
+        // if guard is already attacking, no point talking to you.
         if (guardState != State.ATTACKING)
         {
             if (chatGPTResult == "1")
             {
+                // guard wants you dead, set to attack state
                 if (angerValue >= maxAnger)
                 {
                     ChangeState(State.ATTACKING);
@@ -123,7 +133,7 @@ public class Guard : MonoBehaviour
             }
             else
             {
-                // pay no mind and play audio
+                // pay no mind and play disregarding audio
             }
         }
 
@@ -254,6 +264,41 @@ public class Guard : MonoBehaviour
     {
         return canDamage;
     }
+
+    public int HP
+    {
+        get { return hp; } 
+        set { hp = value; }
+    }
+
+    public void OnHit(int dmg)
+    {
+        HP -= dmg;
+
+        if (HP <= 0)
+        {
+            guardState = State.DEAD;
+        }
+
+
+
+    }
+
+    public void Die()
+    {
+        ToggleRagdoll script;
+
+        if (TryGetComponent(out script))
+        {
+            script.Toggle();
+        }
+        else
+        {
+            Debug.Log("Guard does not have ToggleRagdoll script added in!");
+        }
+    }
+
+
 
 
 

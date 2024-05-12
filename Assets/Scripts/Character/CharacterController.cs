@@ -5,28 +5,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-
-
-public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour, HumanInterface
 {
 
-    // references
+    // -- references
+    [SerializeField] int hp = 100;
     [SerializeField] private float animBlendSpeed = 8.9f;
 
+    // camera 
     [SerializeField] private Transform cameraRoot;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float camUpperLimit = -40f;
     [SerializeField] private float camBottomLimit = 70f;
+    
+    // mouse
     [SerializeField] private float mouseSens = 21.9f;
 
+    // voice -> text transcription
     [SerializeField] private VoskSpeechToText vosk;
     [SerializeField] private VoiceProcessor voiceProcessor;
 
+    // camera animation
     [SerializeField] private float cameraShakeIntensity = 1f;
     [SerializeField] private float cameraShakeDuration = 0.5f;
 
-   
+    // can damage enemies
+    private bool canDamage = false;
+
+    public static event Action onPlayerDead;
+    [SerializeField] private float deathAnimationTime = 2f;
+
+
 
 
     private Rigidbody playerRigBody;
@@ -47,20 +56,9 @@ public class CharacterController : MonoBehaviour
     private float xRotation;
 
 
-    private void OnEnable()
-    {
-        SwordAttack.onPlayerHit += OnHit;
-    }
-
-    private void OnDisable()
-    {
-        SwordAttack.onPlayerHit -= OnHit;
-
-    }
-
     private void Start()
     {
-        hasAnimator = TryGetComponent<Animator>(out animator);
+        hasAnimator = TryGetComponent(out animator);
         playerRigBody = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
 
@@ -125,6 +123,11 @@ public class CharacterController : MonoBehaviour
                 vosk.ToggleRecording();
             }
         }
+
+
+
+
+
     }
 
     private void FixedUpdate()
@@ -139,11 +142,72 @@ public class CharacterController : MonoBehaviour
 
 
     // on player hit, shake camera and lower HP
-    private void OnHit()
-    {
 
+
+    public void OnHit(int dmg)
+    {
         Tween.ShakeLocalPosition(cameraRoot, new Vector3(cameraShakeIntensity, cameraShakeIntensity, cameraShakeIntensity), cameraShakeDuration);
+
+        HP -= dmg;
+
+        if (HP <= 0)
+        {
+            Die();
+        }
+
+
+
     }
+
+    public int HP
+    {
+        get { return hp; }
+        set { hp = value; }
+    
+    }  
+
+    public void Die()
+    {
+        // play death animation, no need to ragdoll and cause bugs.
+        animator.Play("Death");
+        StartCoroutine(InvokeDeathEvent());
+        
+
+
+    }
+
+    IEnumerator InvokeDeathEvent()
+    {
+        yield return new WaitForSeconds(deathAnimationTime);
+        onPlayerDead?.Invoke();
+    }
+
+    // can player deal any damage? refer below function
+    public bool CanDamage()
+    {
+        return canDamage;
+    }
+
+
+    // this will activate automatically when the player plays an attack animation via animation event
+    public void EnableSwordDamage(int enabled)
+    {
+        if (enabled == 1)
+        {
+            canDamage = true;
+        }
+        else
+        {
+            canDamage = false;
+        }
+
+    }
+
+
+
+
+
+
 
 
 

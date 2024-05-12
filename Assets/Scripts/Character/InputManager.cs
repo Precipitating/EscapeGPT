@@ -19,6 +19,20 @@ public class InputManager : MonoBehaviour
     private InputAction runAction;
     private InputAction toggleMicAction;
 
+    private void OnEnable()
+    {
+        currentMap.Enable();
+        CharacterController.onPlayerDead += ShowCursor;
+    }
+
+
+    private void OnDisable()
+    {
+        currentMap.Disable();
+        CharacterController.onPlayerDead -= ShowCursor;
+
+    }
+
     private void Awake()
     {
         HideCursor();
@@ -41,6 +55,11 @@ public class InputManager : MonoBehaviour
 
     }
 
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
     private void HideCursor()
     {
         Cursor.visible = false;
@@ -63,16 +82,7 @@ public class InputManager : MonoBehaviour
         ToggleMic = context.ReadValueAsButton();
     }
 
-    private void OnEnable()
-    {
-        currentMap.Enable();
-    }
 
-
-    private void OnDisable()
-    {
-        currentMap.Disable();
-    }
 
 
 }
