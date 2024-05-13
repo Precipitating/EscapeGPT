@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject crossHair;
     private void OnEnable()
     {
         CharacterController.onPlayerDead += EnableGameOverScreen;
@@ -16,6 +17,7 @@ public class GameOver : MonoBehaviour
     }
     public void ResetScene()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Quit()
@@ -26,5 +28,7 @@ public class GameOver : MonoBehaviour
     private void EnableGameOverScreen()
     {
         gameOverScreen.SetActive(true);
+        crossHair.SetActive(false);
+        Time.timeScale = 0f;
     }
 }

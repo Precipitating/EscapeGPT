@@ -56,6 +56,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
     private float xRotation;
 
 
+
     private void Start()
     {
         hasAnimator = TryGetComponent(out animator);
@@ -128,6 +129,8 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
 
 
+
+
     }
 
     private void FixedUpdate()
@@ -142,8 +145,6 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
 
     // on player hit, shake camera and lower HP
-
-
     public void OnHit(int dmg)
     {
         Tween.ShakeLocalPosition(cameraRoot, new Vector3(cameraShakeIntensity, cameraShakeIntensity, cameraShakeIntensity), cameraShakeDuration);
@@ -168,17 +169,16 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
     public void Die()
     {
-        // play death animation, no need to ragdoll and cause bugs.
+        // play death animation, animation event handles death screen.
         animator.Play("Death");
-        StartCoroutine(InvokeDeathEvent());
         
 
 
     }
 
-    IEnumerator InvokeDeathEvent()
+    // once death animation is finished, this will be invoked via animation event.
+    public void InvokeDeathEvent()
     {
-        yield return new WaitForSeconds(deathAnimationTime);
         onPlayerDead?.Invoke();
     }
 

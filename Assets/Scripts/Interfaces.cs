@@ -9,10 +9,16 @@ public interface HumanInterface
     bool CanDamage();
     void OnHit(int dmg);
     void EnableSwordDamage(int enabled);
-
-
-
     void Die();
+
+
+
+}
+
+
+public interface InteractableInterface
+{
+    void Interact();
 
 
 

@@ -12,12 +12,16 @@ public class InputManager : MonoBehaviour
     public bool Run { get; private set; }
 
     public bool ToggleMic { get; private set; }
+    public bool ToggleInteract { get; private set; }
+
+
 
     private InputActionMap currentMap;
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction runAction;
     private InputAction toggleMicAction;
+    private InputAction toggleInteract;
 
     private void OnEnable()
     {
@@ -41,16 +45,20 @@ public class InputManager : MonoBehaviour
         lookAction = currentMap.FindAction("Look");
         runAction = currentMap.FindAction("Run");
         toggleMicAction = currentMap.FindAction("ToggleMic");
+        toggleInteract = currentMap.FindAction("Interact");
+
 
         moveAction.performed += onMove;
         lookAction.performed += onLook;
         runAction.performed += onRun;
         toggleMicAction.performed += onToggleMic;
+        toggleInteract.performed += onInteract;
 
         moveAction.canceled += onMove;
         lookAction.canceled += onLook;
         runAction.canceled += onRun;
         toggleMicAction.canceled += onToggleMic;
+        toggleInteract.canceled += onInteract;
 
 
     }
@@ -82,6 +90,11 @@ public class InputManager : MonoBehaviour
         ToggleMic = context.ReadValueAsButton();
     }
 
+    private void onInteract(InputAction.CallbackContext context)
+    {
+        ToggleInteract = context.ReadValueAsButton();
+
+    }
 
 
 

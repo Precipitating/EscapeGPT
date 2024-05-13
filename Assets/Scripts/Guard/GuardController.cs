@@ -41,14 +41,15 @@ public class Guard : MonoBehaviour, HumanInterface
 
     private bool canDamage = false;
 
-
+    // controls guard state
     State guardState = State.IDLE;
 
-    // for patrolling, the number represents patrol waypoints in a list
+    // for patrolling, the number represents patrol waypoints indexes in a list
     int patrolDest = 0;
 
     private void OnEnable()
     {
+        // grab the guard's response
         ChatGPTReceiver.onChatGPTResult += Converse;
     }
 
@@ -112,6 +113,7 @@ public class Guard : MonoBehaviour, HumanInterface
         // if guard is already attacking, no point talking to you.
         if (guardState != State.ATTACKING)
         {
+            // 1 = ChatGPT deems what you said insulting
             if (chatGPTResult == "1")
             {
                 // guard wants you dead, set to attack state
@@ -193,6 +195,7 @@ public class Guard : MonoBehaviour, HumanInterface
     
     }
 
+    // change guard state
     public void ChangeState(State state)
     {
         guardState = state;
@@ -202,6 +205,7 @@ public class Guard : MonoBehaviour, HumanInterface
     {
         return guardState;
     }
+    // --
     public void SetStoppingDistance(int distance)
     {
         agent.stoppingDistance = distance;
