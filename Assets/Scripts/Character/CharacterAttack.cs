@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private InputManager inputManager;
+    [SerializeField]
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
+
 }

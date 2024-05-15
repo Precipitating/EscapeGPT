@@ -13,6 +13,9 @@ public class Equip : MonoBehaviour
     int nextAnimToPlay = 1;
 
 
+    private bool swordDrawn = false;
+
+
 
     // Update is called once per frame
     void Update()
@@ -56,14 +59,10 @@ public class Equip : MonoBehaviour
     {
         switch (val)
         {
-            case 1:
-                playerAnimator.SetBool("isEquipPlaying", true);
-
-                break;
-
+            case 1: playerAnimator.SetBool("isPlaying", true); break;
             case 2:
                 {
-                    playerAnimator.SetBool("isEquipPlaying", false);
+                    playerAnimator.SetBool("isPlaying", false);
 
                     switch (playerAnimator.GetInteger("isDrawn"))
                     {
@@ -71,14 +70,14 @@ public class Equip : MonoBehaviour
                         case 2: nextAnimToPlay = 1; break;
 
                     };
-
                     playerAnimator.SetInteger("isDrawn", 0);
-
                     break;
                 }
 
 
         }
+
+        
 
     }
 }
