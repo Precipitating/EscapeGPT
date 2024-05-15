@@ -48,8 +48,8 @@ public class CharacterController : MonoBehaviour, HumanInterface
     private int yVelHash;
 
     // speed
-    private const float  walkSpeed = 2f;
-    private const float runSpeed = 6f;
+    [SerializeField] private const float  walkSpeed = 2f;
+    [SerializeField] private const float runSpeed = 6f;
     private Vector2 currentVel;
 
     // camera

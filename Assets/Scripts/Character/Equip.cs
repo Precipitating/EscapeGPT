@@ -10,6 +10,7 @@ public class Equip : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject targetObject;
+    
     int nextAnimToPlay = 1;
 
 
@@ -66,8 +67,8 @@ public class Equip : MonoBehaviour
 
                     switch (playerAnimator.GetInteger("isDrawn"))
                     {
-                        case 1: nextAnimToPlay = 2; break;
-                        case 2: nextAnimToPlay = 1; break;
+                        case 1: nextAnimToPlay = 2; swordDrawn = true; break;
+                        case 2: nextAnimToPlay = 1; swordDrawn = false; break;
 
                     };
                     playerAnimator.SetInteger("isDrawn", 0);
@@ -79,5 +80,11 @@ public class Equip : MonoBehaviour
 
         
 
+    }
+
+
+    public bool IsHoldingSword()
+    {
+        return swordDrawn;
     }
 }
