@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -13,6 +14,8 @@ public class InputManager : MonoBehaviour
 
     public bool ToggleMic { get; private set; }
     public bool ToggleInteract { get; private set; }
+    public bool Attack{ get; private set; }
+    public bool ToggleSlot1 { get; private set; }
 
 
 
@@ -20,8 +23,13 @@ public class InputManager : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction runAction;
+
     private InputAction toggleMicAction;
     private InputAction toggleInteract;
+
+    private InputAction attack;
+
+    private InputAction toggleSlot1;
 
     private void OnEnable()
     {
@@ -46,6 +54,8 @@ public class InputManager : MonoBehaviour
         runAction = currentMap.FindAction("Run");
         toggleMicAction = currentMap.FindAction("ToggleMic");
         toggleInteract = currentMap.FindAction("Interact");
+        toggleSlot1 = currentMap.FindAction("Slot1");
+        attack = currentMap.FindAction("Attack");
 
 
         moveAction.performed += onMove;
@@ -53,12 +63,16 @@ public class InputManager : MonoBehaviour
         runAction.performed += onRun;
         toggleMicAction.performed += onToggleMic;
         toggleInteract.performed += onInteract;
+        toggleSlot1.started += onSlot1;
+        attack.performed += onAttack;
 
         moveAction.canceled += onMove;
         lookAction.canceled += onLook;
         runAction.canceled += onRun;
         toggleMicAction.canceled += onToggleMic;
         toggleInteract.canceled += onInteract;
+        toggleSlot1.canceled += onSlot1;
+        attack.canceled += onAttack;
 
 
     }
@@ -94,6 +108,17 @@ public class InputManager : MonoBehaviour
     {
         ToggleInteract = context.ReadValueAsButton();
 
+    }
+    private void onAttack(InputAction.CallbackContext context)
+    {
+        Attack = context.ReadValueAsButton();
+
+    }  
+
+    // fix this to be the sword slot 
+    private void onSlot1(InputAction.CallbackContext context)
+    {
+        ToggleSlot1 = context.ReadValueAsButton();
     }
 
 

@@ -21,14 +21,12 @@ public class Interact : MonoBehaviour
        
         if (inputManager.ToggleInteract)
         {
-            Debug.Log("pressed");
-
             ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
             // only detects objects on layer Interactable at a distance of 1
             if (Physics.Raycast(ray, out hit, interactionDistance, interactableMask))
             {
                 Debug.Log("Interactable detected!");
-                // call the interact function on the object which will function differently.
+                // call the interact function on the object which will either pickup or open/close depending on object type.
                 hit.transform.gameObject.GetComponent<InteractableInterface>().Interact();
             }
 
