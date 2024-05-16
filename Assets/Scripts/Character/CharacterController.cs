@@ -203,6 +203,10 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
     }
 
+    public bool IsRunning()
+    {
+        return inputManager.Run;
+    }
 
 
 

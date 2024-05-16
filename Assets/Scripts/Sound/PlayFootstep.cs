@@ -7,6 +7,7 @@ public class PlayFootstep : MonoBehaviour
 
     [SerializeField] AudioClip[] footStepSound;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] HumanInterface human;
 
     private void Start()
     {
@@ -17,15 +18,19 @@ public class PlayFootstep : MonoBehaviour
         else
         {
             audioSource = GetComponent<AudioSource>(); 
+            human = GetComponent<HumanInterface>();
         }
     }
 
-    public void Footstep()
+    public void Footstep(AnimationEvent val)
     {
-        if (!audioSource.isPlaying)
+        if (val.animatorClipInfo.weight > 0.5f)
         {
             audioSource.PlayOneShot(footStepSound[UnityEngine.Random.Range(0, footStepSound.Length)]);
         }
+
+        
+
         
     }
 }

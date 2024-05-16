@@ -39,6 +39,9 @@ public class Guard : MonoBehaviour, HumanInterface
     [SerializeField] private int attackDistance = 1;
     [SerializeField] private bool isAttacking = false;
 
+    // speed
+    private float walkSpeed;
+
     private bool canDamage = false;
 
     // controls guard state
@@ -95,6 +98,7 @@ public class Guard : MonoBehaviour, HumanInterface
     private void Setup()
     {
         guardState = State.PATROL;
+        walkSpeed = agent.speed;
         agent.SetDestination(waypoints[patrolDest].transform.position);
     }
 
@@ -300,6 +304,11 @@ public class Guard : MonoBehaviour, HumanInterface
         {
             Debug.Log("Guard does not have ToggleRagdoll script added in!");
         }
+    }
+
+    public bool IsRunning()
+    {
+        return (agent.speed > walkSpeed);
     }
 
 

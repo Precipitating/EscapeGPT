@@ -11,6 +11,8 @@ public interface HumanInterface
     void EnableSwordDamage(int enabled);
     void Die();
 
+    bool IsRunning();
+
 
 
 }
