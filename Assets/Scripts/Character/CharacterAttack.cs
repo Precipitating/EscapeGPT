@@ -17,7 +17,7 @@ public class CharacterAttack : MonoBehaviour
         {
             if (IsAnimatingAttack())
             {
-                playerAnimator.SetInteger("SwordAttack", Random.Range(0, 3));
+                playerAnimator.SetInteger("SwordAttack", Random.Range(0, attackVariations + 1));
             }
         }
     }

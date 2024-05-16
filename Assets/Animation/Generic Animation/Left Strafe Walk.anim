@@ -34746,11 +34746,12 @@ AnimationClip:
   - time: 0.43333334
     functionName: Footstep
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: dd28756f93b32124a8733f18697ddb9e,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.9
+  - time: 0.8333333
     functionName: Footstep
     data: 
     objectReferenceParameter: {fileID: 0}
