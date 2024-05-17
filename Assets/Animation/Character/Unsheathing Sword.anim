@@ -45387,7 +45387,7 @@ AnimationClip:
     objectReferenceParameter: {fileID: 11500000, guid: 05e265e45492da344be1a19b306101dc,
       type: 3}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
     messageOptions: 0
   - time: 0.6666667
     functionName: WeaponVisible
@@ -45403,5 +45403,5 @@ AnimationClip:
     objectReferenceParameter: {fileID: 11500000, guid: 05e265e45492da344be1a19b306101dc,
       type: 3}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0

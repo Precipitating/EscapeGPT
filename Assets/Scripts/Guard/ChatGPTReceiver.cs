@@ -23,12 +23,12 @@ public class ChatGPTReceiver : MonoBehaviour
     }
     private void OnEnable()
     {
-        ResultReceiver.onGuardHear += AskChatGPT;
+        VoiceDetected.onGuardHear += AskChatGPT;
     }
 
     private void OnDisable()
     {
-        ResultReceiver.onGuardHear -= AskChatGPT;
+        VoiceDetected.onGuardHear -= AskChatGPT;
     }
 
     private void RoleSetter(string prompt)
