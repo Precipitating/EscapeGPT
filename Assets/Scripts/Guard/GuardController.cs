@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Voxell.Speech.TTS;
 
 public class Guard : MonoBehaviour, HumanInterface
 {
@@ -39,6 +42,13 @@ public class Guard : MonoBehaviour, HumanInterface
     [SerializeField] private int attackDistance = 1;
     [SerializeField] private bool isAttacking = false;
 
+    // Text to speech script
+    [SerializeField] PlayTTS ttsScript;
+    [SerializeField] string hurtNoise = "augh";
+
+    // check if conversing
+    private bool isConversing = false;
+
     // speed
     private float walkSpeed;
 
@@ -50,15 +60,23 @@ public class Guard : MonoBehaviour, HumanInterface
     // for patrolling, the number represents patrol waypoints indexes in a list
     int patrolDest = 0;
 
+
+
+
+
+
+
     private void OnEnable()
     {
         // grab the guard's response
         ChatGPTReceiver.onChatGPTResult += Converse;
+        TextToSpeech.onGuardFinishedSpeaking += ResumePatrol;
     }
 
     private void OnDisable()
     {
         ChatGPTReceiver.onChatGPTResult -= Converse;
+        TextToSpeech.onGuardFinishedSpeaking -= ResumePatrol;
     }
 
 
@@ -104,21 +122,37 @@ public class Guard : MonoBehaviour, HumanInterface
 
     private void Patrol()
     {
-        if (!agent.hasPath || agent.remainingDistance < 0.1f)
+        if (!isConversing)
         {
-            // keep switching back and forth waypoints which there is currently 2 waypoints
-            patrolDest = patrolDest == 0 ? 1 : 0;
-            agent.SetDestination(waypoints[patrolDest].transform.position);
+            if (!agent.hasPath || agent.remainingDistance < 0.1f)
+            {
+               
+                TogglePatrolDest();
+                agent.SetDestination(waypoints[patrolDest].transform.position);
+            }
+
         }
+
+
+
     }
 
     private void Converse(string chatGPTResult)
     {
+
         // if guard is already attacking, no point talking to you.
-        if (guardState != State.ATTACKING)
+        if (guardState != State.ATTACKING && !isConversing)
         {
+            isConversing = true;
+            // make it swap to the other patrol destination so it'll retoggle back to the original destination 
+            TogglePatrolDest();
+
+            // go to the nearest valid destination towards the player
+            agent.SetDestination(characterPosition.position);
+            transform.LookAt(characterPosition.position);
+
             // 1 = ChatGPT deems what you said insulting
-            if (chatGPTResult == "1")
+            if (chatGPTResult[0] == '1')
             {
                 // guard wants you dead, set to attack state
                 if (angerValue >= maxAnger)
@@ -130,16 +164,13 @@ public class Guard : MonoBehaviour, HumanInterface
                     animator.Play("Unsheath");
                     unsheathedSword.enabled = true;
                     sheathedSword.enabled = false;
+                    agent.isStopped = false;
 
                 }
                 else
                 {
                     ++angerValue;
                 }
-            }
-            else
-            {
-                // pay no mind and play disregarding audio
             }
         }
 
@@ -149,9 +180,8 @@ public class Guard : MonoBehaviour, HumanInterface
     private void Attack()
     {
         // check if guard -> player is reachable
-        NavMeshPath path = new NavMeshPath();
-        agent.CalculatePath(characterPosition.position, path);
-        if (path.status == NavMeshPathStatus.PathPartial || path.status ==  NavMeshPathStatus.PathInvalid)
+
+        if (IsUnreachable())
         {
             // if not, open lever so player is reachable
             agent.destination = leverPosition.position;
@@ -282,6 +312,7 @@ public class Guard : MonoBehaviour, HumanInterface
     public void OnHit(int dmg)
     {
         HP -= dmg;
+        ttsScript.PlayDirectly(hurtNoise);
 
         if (HP <= 0)
         {
@@ -295,7 +326,6 @@ public class Guard : MonoBehaviour, HumanInterface
     public void Die()
     {
         ToggleRagdoll script;
-
         if (TryGetComponent(out script))
         {
             script.Toggle();
@@ -311,7 +341,26 @@ public class Guard : MonoBehaviour, HumanInterface
         return (agent.speed > walkSpeed);
     }
 
+    private void ResumePatrol()
+    {
+        isConversing = false;
 
+    }
+
+    // keep switching back and forth waypoints which there is currently 2 waypoints.
+    private void TogglePatrolDest()
+    {
+        patrolDest = patrolDest == 0 ? 1 : 0;
+    }
+
+
+    public bool IsUnreachable()
+    {
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(characterPosition.position, path);
+
+        return (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid);
+    }
 
 
 

@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOver : MonoBehaviour
+public class OnEscape : MonoBehaviour
 {
-    [SerializeField] GameObject gameOverScreen;
+
+    [SerializeField] GameObject escapeScreen;
     [SerializeField] GameObject crossHair;
+    
+
     private void OnEnable()
     {
-        CharacterController.onPlayerDead += EnableGameOverScreen;
-        
+        ExitDoor.OnEscape += EnableEscapeScreen;
     }
+
     private void OnDisable()
     {
-        CharacterController.onPlayerDead -= EnableGameOverScreen;
-        
+        ExitDoor.OnEscape -= EnableEscapeScreen;
     }
+
     public void ResetScene()
     {
         Time.timeScale = 1f;
@@ -27,10 +30,12 @@ public class GameOver : MonoBehaviour
         Application.Quit();
     }
 
-    private void EnableGameOverScreen()
+    void EnableEscapeScreen()
     {
-        gameOverScreen.SetActive(true);
+        escapeScreen.SetActive(true);
         crossHair.SetActive(false);
         Time.timeScale = 0f;
+
     }
+
 }

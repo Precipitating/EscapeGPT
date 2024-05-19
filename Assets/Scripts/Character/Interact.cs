@@ -15,23 +15,50 @@ public class Interact : MonoBehaviour
 
     [SerializeField] private Camera camera;
 
+    private Outline currentObjectOutline;
 
+    private bool isOn = false;
     public void Update()
     {
-       
-        if (inputManager.ToggleInteract)
+        ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        // only detects objects on layer Interactable at a distance of interactionDistance
+        if (Physics.Raycast(ray, out hit, interactionDistance, interactableMask))
         {
-            ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            // only detects objects on layer Interactable at a distance of 1
-            if (Physics.Raycast(ray, out hit, interactionDistance, interactableMask))
+
+            // show outline if hovered over
+            if (!isOn)
             {
-                Debug.Log("Interactable detected!");
+                if (currentObjectOutline == null )
+                {
+                    currentObjectOutline = hit.transform.gameObject.GetComponent<Outline>();
+
+                }
+
+                currentObjectOutline.enabled = true;
+                isOn = true;
+            }
+
+
+            // handle interaction
+            if (inputManager.ToggleInteract)
+            {
                 // call the interact function on the object which will either pickup or open/close depending on object type.
                 hit.transform.gameObject.GetComponent<InteractableInterface>().Interact();
             }
 
-
         }
+        else
+        {
+            if (isOn)
+            {
+                currentObjectOutline.enabled = false;
+                currentObjectOutline = null; 
+                isOn = false;
+            }
+        }
+
+
+
 
     }
 }

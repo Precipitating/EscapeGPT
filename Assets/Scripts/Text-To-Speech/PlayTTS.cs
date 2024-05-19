@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Voxell.Speech.TTS;
 
@@ -9,12 +10,12 @@ public class PlayTTS : MonoBehaviour
     private void OnEnable()
     {
         // grab the guard's response
-        VoiceDetected.onGuardHear += PlayGPTResult;
+        ChatGPTReceiver.onChatGPTResult += PlayGPTResult;
     }
 
     private void OnDisable()
     {
-        VoiceDetected.onGuardHear += PlayGPTResult;
+        ChatGPTReceiver.onChatGPTResult += PlayGPTResult;
     }
 
 
@@ -22,13 +23,41 @@ public class PlayTTS : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            coreTTS.Speak("Shut up prisoner or else I will kill you!");
+            if (!coreTTS.IsPlaying())
+            {
+                PlayDirectly("Be quiet you filthy disgusting prisoner");
+            }
+            
 
         }
     }
     private void PlayGPTResult(string response)
     {
-        coreTTS.Speak("Be quiet you gimp");
+
+        Debug.Log(response);
+
+        if (response[0] == '1')
+        {
+            coreTTS.Speak(response.Substring(1));
+        }
+        else
+        {
+            coreTTS.Speak(response);
+        }
+
+
     }
+
+
+    public void PlayDirectly(string voiceline)
+    {
+        if (!coreTTS.IsPlaying())
+        {
+            coreTTS.Speak(voiceline);
+        }
+        
+
+    }
+
 
 }

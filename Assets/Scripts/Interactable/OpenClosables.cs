@@ -9,6 +9,7 @@ public class OpenClosables : MonoBehaviour, InteractableInterface
     public void Interact()
     {
         // we don't know exactly what the object is, so we can assign the specific function in inspector.
+        // simpler than game tags, for now.
         openCloseObject.Invoke(); 
 
     }

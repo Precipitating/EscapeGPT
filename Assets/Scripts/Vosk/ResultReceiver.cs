@@ -16,7 +16,7 @@ public class ResultReceiver : MonoBehaviour
     }
 
 
-    // get the string result of what GPT replied with
+    // get the string result of what you said and invoke an event
     private void OnTranscriptionResult(string obj)
     {
         Debug.Log(JSONConverter(obj));

@@ -35,6 +35,7 @@ public class InputManager : MonoBehaviour
     {
         currentMap.Enable();
         CharacterController.onPlayerDead += ShowCursor;
+        ExitDoor.OnEscape += ShowCursor;  
     }
 
 
@@ -42,6 +43,7 @@ public class InputManager : MonoBehaviour
     {
         currentMap.Disable();
         CharacterController.onPlayerDead -= ShowCursor;
+        ExitDoor.OnEscape -= ShowCursor;
 
     }
 
@@ -70,7 +72,7 @@ public class InputManager : MonoBehaviour
         lookAction.canceled += onLook;
         runAction.canceled += onRun;
         toggleMicAction.canceled += onToggleMic;
-        toggleInteract.canceled += onInteract;
+        toggleInteract.canceled += onInteractCancel;
         toggleSlot1.canceled += onSlot1;
         attack.canceled += onAttack;
 
@@ -106,7 +108,18 @@ public class InputManager : MonoBehaviour
 
     private void onInteract(InputAction.CallbackContext context)
     {
-        ToggleInteract = context.ReadValueAsButton();
+        if (context.performed)
+        {
+            ToggleInteract = true;
+        }
+
+    }  
+    private void onInteractCancel(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            ToggleInteract = false;
+        }
 
     }
     private void onAttack(InputAction.CallbackContext context)
@@ -120,6 +133,7 @@ public class InputManager : MonoBehaviour
     {
         ToggleSlot1 = context.ReadValueAsButton();
     }
+
 
 
 

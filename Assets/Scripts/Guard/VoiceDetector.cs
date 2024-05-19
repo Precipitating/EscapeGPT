@@ -9,6 +9,9 @@ public class VoiceDetected : MonoBehaviour
     [SerializeField] private int hearingDistance = 15;
     public static event Action<string> onGuardHear;
 
+    // same but without requiring the string parameter for ToggleMic class
+    public event Action onGuardHearVoid;
+
     private void OnEnable()
     {
         ResultReceiver.onGuardHear += EnemyVoiceAction;
@@ -23,13 +26,19 @@ public class VoiceDetected : MonoBehaviour
     // check if guard can "hear" from a specified distance
     void EnemyVoiceAction(string transcribeResult)
     {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < hearingDistance)
+        if (IsHearingRange())
         {
             onGuardHear?.Invoke(transcribeResult);
+            onGuardHearVoid?.Invoke();
             Debug.Log("Enemy can hear this");
 
         }
 
         
+    }
+
+    public bool IsHearingRange()
+    {
+        return (Vector3.Distance(player.transform.position, transform.position) < hearingDistance);
     }
 }

@@ -17,7 +17,6 @@ public class PlayFootstep : MonoBehaviour
         }
         else
         {
-            audioSource = GetComponent<AudioSource>(); 
             human = GetComponent<HumanInterface>();
         }
     }

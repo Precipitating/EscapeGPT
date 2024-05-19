@@ -21,9 +21,6 @@ public class CharacterController : MonoBehaviour, HumanInterface
     // mouse
     [SerializeField] private float mouseSens = 21.9f;
 
-    // voice -> text transcription
-    [SerializeField] private VoskSpeechToText vosk;
-    [SerializeField] private VoiceProcessor voiceProcessor;
 
     // camera animation
     [SerializeField] private float cameraShakeIntensity = 1f;
@@ -32,8 +29,10 @@ public class CharacterController : MonoBehaviour, HumanInterface
     // can damage enemies
     private bool canDamage = false;
 
+    // death
     public static event Action onPlayerDead;
     [SerializeField] private float deathAnimationTime = 2f;
+    bool isDead = false;
 
 
 
@@ -54,6 +53,8 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
     // camera
     private float xRotation;
+
+
 
 
 
@@ -87,7 +88,11 @@ public class CharacterController : MonoBehaviour, HumanInterface
         var xVelDifference = currentVel.x - playerRigBody.velocity.x; 
         var zVelDifference = currentVel.y - playerRigBody.velocity.z; 
 
-        playerRigBody.AddForce(transform.TransformVector(new Vector3(currentVel.x, 0, currentVel.y)), ForceMode.VelocityChange);
+        if (!isDead)
+        {
+            playerRigBody.AddForce(transform.TransformVector(new Vector3(currentVel.x, 0, currentVel.y)), ForceMode.VelocityChange);
+        }
+        
 
         animator.SetFloat(xVelHash, currentVel.x);
         animator.SetFloat(yVelHash, currentVel.y);
@@ -114,33 +119,20 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
     }
 
-    private void Update()
-    {
-        // handle mic toggling
-        if (inputManager.ToggleMic)
-        {
-            if (!voiceProcessor.IsRecording)
-            {
-                vosk.ToggleRecording();
-            }
-        }
-
-
-
-
-
-
-
-    }
 
     private void FixedUpdate()
     {
+
         Move();
+        
     }
 
     private void LateUpdate()
     {
+
         CameraMove();
+        
+        
     }
 
 
@@ -171,6 +163,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
     {
         // play death animation, animation event handles death screen.
         animator.Play("Death");
+        isDead = true;
         
 
 
