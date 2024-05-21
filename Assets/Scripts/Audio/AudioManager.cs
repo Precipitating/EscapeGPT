@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 
 // Should only handle 2D sounds. 3D will be handled in their components.
@@ -10,8 +11,7 @@ public class AudioManager : MonoBehaviour
     // singleton
     public static AudioManager instance;
 
-    public Sound[] globalSoundList;
-    public Sound[] swordSwingList;
+    public Sound[] globalSoundList, fleshCutList, swordMissList;
     public AudioSource sfxSource,musicSource;
 
     private void Awake()
@@ -60,6 +60,19 @@ public class AudioManager : MonoBehaviour
             sfxSource.Play();
         }
     }
+
+    public AudioClip GetGlobalSFX(string name)
+    {
+        return Array.Find(globalSoundList, x => x.name == name).clip;
+    }
+
+    public void PlayRandom2D(Sound[] list)
+    {
+        Sound sound = Array.Find(list, x => x.name == name);
+
+        sfxSource.PlayOneShot(list[UnityEngine.Random.Range(0, list.Length)].clip);
+    }
+
 
 
 

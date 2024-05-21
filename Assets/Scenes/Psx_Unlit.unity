@@ -8096,7 +8096,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 124b8feb11ca8bc4f958d2730e8a6da4, type: 3}
   - name: ExitFail
     clip: {fileID: 8300000, guid: 5d6c1abfa0454e04b8c8c6cc62d66472, type: 3}
-  swordSwingList: []
+  - name: Pickup
+    clip: {fileID: 8300000, guid: 7d27c79631eaf604f9f1b859bbc17c7a, type: 3}
+  fleshCutList:
+  - name: Flesh1
+    clip: {fileID: 8300000, guid: b2f314caed4e38e459608e4d14ad601b, type: 3}
+  - name: Flesh2
+    clip: {fileID: 8300000, guid: 4c32c4b6516c7734796ee567e0a3fefd, type: 3}
+  - name: Flesh3
+    clip: {fileID: 8300000, guid: 6ddbc6846765f7c448cfe1e84266f303, type: 3}
+  swordMissList:
+  - name: SwordMiss1
+    clip: {fileID: 8300000, guid: a875651beb721b84b838f1ab2506056c, type: 3}
+  - name: SwordMiss2
+    clip: {fileID: 8300000, guid: 6ab1b8e207073ec478dbd9b311a7dc86, type: 3}
+  - name: SwordMiss3
+    clip: {fileID: 8300000, guid: 13415360952895c459c2a17ce826affc, type: 3}
   sfxSource: {fileID: 903549405}
   musicSource: {fileID: 104587459}
 --- !u!4 &913929649

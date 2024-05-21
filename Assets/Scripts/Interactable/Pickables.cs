@@ -10,6 +10,9 @@ public class Pickable : MonoBehaviour, InteractableInterface
         // store in player inventory
         Inventory.instance.AddItem(currentItem);
 
+        // play pick up sound
+        AudioManager.instance.PlayGlobalSFX("Pickup");
+
 
         // then set inactive
         gameObject.SetActive(false);

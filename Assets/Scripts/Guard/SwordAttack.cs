@@ -31,6 +31,11 @@ public class SwordAttack : MonoBehaviour
                 {
                     Debug.Log(other.tag + "Hit!");
                     unknownController.OnHit(dmg);
+
+                    // play a random flesh cut sound effect
+                    AudioManager.instance.PlayRandom2D(AudioManager.instance.fleshCutList);
+
+
                     // 2 = false, animation event does not accept bool
                     // disable sword dmg so it doesn't retrigger multiple times per swing
                     attachedController.EnableSwordDamage(2);

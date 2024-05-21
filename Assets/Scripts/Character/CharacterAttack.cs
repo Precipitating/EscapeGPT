@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterAttack : MonoBehaviour
 {
@@ -13,10 +15,11 @@ public class CharacterAttack : MonoBehaviour
 
     void Update()
     {
-        if (inputManager.Attack && equipScript.IsHoldingSword())
+        if (Mouse.current.leftButton.wasPressedThisFrame && equipScript.IsHoldingSword())
         {
             if (IsAnimatingAttack())
             {
+                
                 playerAnimator.SetInteger("SwordAttack", Random.Range(0, attackVariations + 1));
             }
         }
@@ -34,7 +37,7 @@ public class CharacterAttack : MonoBehaviour
     {
         switch (val)
         {
-            case 1: isReady = false; break;
+            case 1: isReady = false; AudioManager.instance.PlayRandom2D(AudioManager.instance.swordMissList); break;
             case 2: isReady = true; playerAnimator.SetInteger("SwordAttack", 0); break;
         
         }

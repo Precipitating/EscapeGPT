@@ -12,7 +12,6 @@ public class InputManager : MonoBehaviour
     public Vector2 Look { get; private set; }
     public bool Run { get; private set; }
 
-    public bool Attack{ get; private set; }
 
 
 
@@ -49,18 +48,16 @@ public class InputManager : MonoBehaviour
         moveAction = currentMap.FindAction("Move");
         lookAction = currentMap.FindAction("Look");
         runAction = currentMap.FindAction("Run");
-        attack = currentMap.FindAction("Attack");
 
 
         moveAction.performed += onMove;
         lookAction.performed += onLook;
         runAction.performed += onRun;
-        attack.performed += onAttack;
 
         moveAction.canceled += onMove;
         lookAction.canceled += onLook;
         runAction.canceled += onRun;
-        attack.canceled += onAttack;
+
 
 
     }
@@ -88,11 +85,7 @@ public class InputManager : MonoBehaviour
         Run = context.ReadValueAsButton();
     }
 
-    private void onAttack(InputAction.CallbackContext context)
-    {
-        Attack = context.ReadValueAsButton();
 
-    }  
 
 
 

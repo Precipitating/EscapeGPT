@@ -31,7 +31,11 @@ public class PlayRandom: MonoBehaviour
         invokeSwordSound?.Invoke();
         
 
+    }
 
+    public void Unsheath()
+    {
+        audioSource.PlayOneShot(AudioManager.instance.GetGlobalSFX("Unsheath"));
     }
 
 
