@@ -12,10 +12,7 @@ public class InputManager : MonoBehaviour
     public Vector2 Look { get; private set; }
     public bool Run { get; private set; }
 
-    public bool ToggleMic { get; private set; }
-    public bool ToggleInteract { get; private set; }
     public bool Attack{ get; private set; }
-    public bool ToggleSlot1 { get; private set; }
 
 
 
@@ -24,12 +21,10 @@ public class InputManager : MonoBehaviour
     private InputAction lookAction;
     private InputAction runAction;
 
-    private InputAction toggleMicAction;
-    private InputAction toggleInteract;
 
     private InputAction attack;
 
-    private InputAction toggleSlot1;
+
 
     private void OnEnable()
     {
@@ -54,26 +49,17 @@ public class InputManager : MonoBehaviour
         moveAction = currentMap.FindAction("Move");
         lookAction = currentMap.FindAction("Look");
         runAction = currentMap.FindAction("Run");
-        toggleMicAction = currentMap.FindAction("ToggleMic");
-        toggleInteract = currentMap.FindAction("Interact");
-        toggleSlot1 = currentMap.FindAction("Slot1");
         attack = currentMap.FindAction("Attack");
 
 
         moveAction.performed += onMove;
         lookAction.performed += onLook;
         runAction.performed += onRun;
-        toggleMicAction.performed += onToggleMic;
-        toggleInteract.performed += onInteract;
-        toggleSlot1.started += onSlot1;
         attack.performed += onAttack;
 
         moveAction.canceled += onMove;
         lookAction.canceled += onLook;
         runAction.canceled += onRun;
-        toggleMicAction.canceled += onToggleMic;
-        toggleInteract.canceled += onInteractCancel;
-        toggleSlot1.canceled += onSlot1;
         attack.canceled += onAttack;
 
 
@@ -101,38 +87,13 @@ public class InputManager : MonoBehaviour
     {
         Run = context.ReadValueAsButton();
     }
-    private void onToggleMic(InputAction.CallbackContext context)
-    {
-        ToggleMic = context.ReadValueAsButton();
-    }
 
-    private void onInteract(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            ToggleInteract = true;
-        }
-
-    }  
-    private void onInteractCancel(InputAction.CallbackContext context)
-    {
-        if (context.canceled)
-        {
-            ToggleInteract = false;
-        }
-
-    }
     private void onAttack(InputAction.CallbackContext context)
     {
         Attack = context.ReadValueAsButton();
 
     }  
 
-    // fix this to be the sword slot 
-    private void onSlot1(InputAction.CallbackContext context)
-    {
-        ToggleSlot1 = context.ReadValueAsButton();
-    }
 
 
 

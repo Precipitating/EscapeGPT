@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 
 public class Interact : MonoBehaviour
 {
+    // ray to detect what is being looked at
     private Ray ray;
     private RaycastHit hit;
 
+    // interaction 
     [SerializeField] private float interactionDistance = 1f;
     [SerializeField] private LayerMask interactableMask;
     [SerializeField] private InputManager inputManager;
@@ -17,6 +19,7 @@ public class Interact : MonoBehaviour
 
     private Outline currentObjectOutline;
 
+    // determines if outline is rendered
     private bool isOn = false;
     public void Update()
     {
@@ -40,7 +43,7 @@ public class Interact : MonoBehaviour
 
 
             // handle interaction
-            if (inputManager.ToggleInteract)
+            if (Keyboard.current[Key.E].wasPressedThisFrame)
             {
                 // call the interact function on the object which will either pickup or open/close depending on object type.
                 hit.transform.gameObject.GetComponent<InteractableInterface>().Interact();

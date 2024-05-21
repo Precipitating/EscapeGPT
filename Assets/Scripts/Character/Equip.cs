@@ -21,7 +21,7 @@ public class Equip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inputManager.ToggleSlot1)
+        if (Keyboard.current[Key.Digit1].wasPressedThisFrame)
         {
             Debug.Log("Attempt to equip sword!");
             if (Inventory.instance.Exists("Sword"))
@@ -32,6 +32,11 @@ public class Equip : MonoBehaviour
                 {
                     playerAnimator.SetInteger("isDrawn", nextAnimToPlay);
 
+                    switch (nextAnimToPlay)
+                    {
+                        case 1: AudioManager.instance.PlayGlobalSFX("Unsheath"); break;
+                        case 2: AudioManager.instance.PlayGlobalSFX("Sheath"); break;
+                    }
 
 
                 }
@@ -87,4 +92,7 @@ public class Equip : MonoBehaviour
     {
         return swordDrawn;
     }
+
+
+
 }

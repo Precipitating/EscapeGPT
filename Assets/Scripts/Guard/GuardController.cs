@@ -152,7 +152,7 @@ public class Guard : MonoBehaviour, HumanInterface
             transform.LookAt(characterPosition.position);
 
             // 1 = ChatGPT deems what you said insulting
-            if (chatGPTResult[0] == '1')
+            if (chatGPTResult[0] == '|')
             {
                 // guard wants you dead, set to attack state
                 if (angerValue >= maxAnger)

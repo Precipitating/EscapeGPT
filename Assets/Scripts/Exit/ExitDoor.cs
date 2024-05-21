@@ -18,11 +18,11 @@ public class ExitDoor : MonoBehaviour, InteractableInterface
         if (guardScript.GetState() == Guard.State.DEAD || guardScript.IsUnreachable())
         {
             OnEscape?.Invoke();
+            AudioManager.instance.PlayGlobalSFX("ExitSuccess");
         }
         else
         {
-            tts.PlayDirectly(failedEscapeLine);
-            Debug.Log("PALYING");
+            AudioManager.instance.PlayGlobalSFX("ExitFail");
         }
             
     }

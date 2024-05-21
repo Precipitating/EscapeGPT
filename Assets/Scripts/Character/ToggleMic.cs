@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using Voxell.Speech.TTS;
+using UnityEngine.InputSystem;
 
 public class ToggleMic : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class ToggleMic : MonoBehaviour
     void Update()
     {
         // handle mic toggling
-        if (inputManager.ToggleMic && !voiceProcessor.IsRecording)
+        if (Keyboard.current[Key.V].wasPressedThisFrame && !voiceProcessor.IsRecording)
         {
             if (isUsable)
             {      

@@ -26,6 +26,7 @@ public class PlayTTS : MonoBehaviour
             if (!coreTTS.IsPlaying())
             {
                 PlayDirectly("Be quiet you filthy disgusting prisoner");
+
             }
             
 

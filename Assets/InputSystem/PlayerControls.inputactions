@@ -33,36 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleMic",
-                    "type": "Button",
-                    "id": "6f24de06-87cb-47e7-aa5f-3003236ea4f6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "6cdf04a8-9a00-4052-9010-01a4c7272668",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "ec9562f4-ca9c-43f8-8123-c8a5444de3c3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Slot1",
-                    "type": "Button",
-                    "id": "8aa54429-5836-4a18-b72b-32851e49bdec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -149,45 +122,12 @@
                 },
                 {
                     "name": "",
-                    "id": "f65b50c4-3028-4823-bde4-24f3445a8813",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleMic",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4ae0838d-4d23-4a09-980f-eee47f9375c2",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "86ce26da-ed34-4aba-b9f4-2410a7c149d5",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "15abe2fa-c150-4641-8d64-6f295ba722bc",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slot1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
