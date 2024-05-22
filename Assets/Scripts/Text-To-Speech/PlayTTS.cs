@@ -15,22 +15,22 @@ public class PlayTTS : MonoBehaviour
 
     private void OnDisable()
     {
-        ChatGPTReceiver.onChatGPTResult += PlayGPTResult;
+        ChatGPTReceiver.onChatGPTResult -= PlayGPTResult;
     }
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (!coreTTS.IsPlaying())
-            {
-                PlayDirectly("Be quiet you filthy disgusting prisoner");
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    if (!coreTTS.IsPlaying())
+        //    {
+        //        PlayDirectly("Be quiet you filthy disgusting prisoner");
 
-            }
+        //    }
             
 
-        }
+        //}
     }
     private void PlayGPTResult(string response)
     {
@@ -59,6 +59,7 @@ public class PlayTTS : MonoBehaviour
         
 
     }
+
 
 
 }

@@ -139,6 +139,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
     // on player hit, shake camera and lower HP
     public void OnHit(int dmg)
     {
+        AudioManager.instance.PlayRandom2D(AudioManager.instance.hurtList);
         Tween.ShakeLocalPosition(cameraRoot, new Vector3(cameraShakeIntensity, cameraShakeIntensity, cameraShakeIntensity), cameraShakeDuration);
 
         HP -= dmg;

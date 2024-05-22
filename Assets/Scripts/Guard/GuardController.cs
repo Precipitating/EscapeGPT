@@ -42,9 +42,13 @@ public class Guard : MonoBehaviour, HumanInterface
     [SerializeField] private int attackDistance = 1;
     [SerializeField] private bool isAttacking = false;
 
-    // Text to speech script
+    // text to speech script
     [SerializeField] PlayTTS ttsScript;
     [SerializeField] string hurtNoise = "augh";
+
+    // sound
+    [SerializeField] AudioSource audioSource;
+
 
     // check if conversing
     private bool isConversing = false;
@@ -52,13 +56,16 @@ public class Guard : MonoBehaviour, HumanInterface
     // speed
     private float walkSpeed;
 
+    // can guard sword damage?
     private bool canDamage = false;
 
     // controls guard state
     State guardState = State.IDLE;
 
     // for patrolling, the number represents patrol waypoints indexes in a list
-    int patrolDest = 0;
+    private int patrolDest = 0;
+
+
 
 
 
@@ -169,6 +176,7 @@ public class Guard : MonoBehaviour, HumanInterface
                 }
                 else
                 {
+                    AudioManager.instance.PlayGlobalSFX("AngerUp");
                     ++angerValue;
                 }
             }
@@ -312,7 +320,7 @@ public class Guard : MonoBehaviour, HumanInterface
     public void OnHit(int dmg)
     {
         HP -= dmg;
-        ttsScript.PlayDirectly(hurtNoise);
+        audioSource.PlayOneShot(AudioManager.instance.GetRandomClip(AudioManager.instance.hurtList));
 
         if (HP <= 0)
         {

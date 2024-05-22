@@ -639,7 +639,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.000000838656, y: 1.7177029, z: -0.0000011026859}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -944,7 +944,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3362,11 +3362,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5303d6366bcc6444d8d5d24c77d479e9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1960588696}
+      addedObject: {fileID: 1960588695}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5303d6366bcc6444d8d5d24c77d479e9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1960588695}
+      addedObject: {fileID: 1960588698}
   m_SourcePrefab: {fileID: 100100000, guid: 5303d6366bcc6444d8d5d24c77d479e9, type: 3}
 --- !u!1 &363766914
 GameObject:
@@ -3609,7 +3609,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.000007756054, y: 3.370998, z: 0.00000047683716}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3886,7 +3886,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -2.3274496, y: 1.6361425, z: -0.017383844}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -4283,7 +4283,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.72484183, y: -0.38204893, z: -0.24218047}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5157,6 +5157,102 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 949922040}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &567169523
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567169516}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &574763929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5787,7 +5883,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.0000005904585, y: 1.7186556, z: -0.00000023841858}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -6152,7 +6248,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.000046585395, y: 1.4913983, z: -0.08651203}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -6506,7 +6602,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.7248422, y: -0.38204893, z: -0.24935126}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -8098,6 +8194,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5d6c1abfa0454e04b8c8c6cc62d66472, type: 3}
   - name: Pickup
     clip: {fileID: 8300000, guid: 7d27c79631eaf604f9f1b859bbc17c7a, type: 3}
+  - name: AngerUp
+    clip: {fileID: 8300000, guid: 11313909633b1794e9e1cc8ad058a097, type: 3}
   fleshCutList:
   - name: Flesh1
     clip: {fileID: 8300000, guid: b2f314caed4e38e459608e4d14ad601b, type: 3}
@@ -8112,6 +8210,24 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 6ab1b8e207073ec478dbd9b311a7dc86, type: 3}
   - name: SwordMiss3
     clip: {fileID: 8300000, guid: 13415360952895c459c2a17ce826affc, type: 3}
+  hurtList:
+  - name: Hurt1
+    clip: {fileID: 8300000, guid: 5f3da2ceded3782439e5e0108a17eeab, type: 3}
+  - name: Hurt2
+    clip: {fileID: 8300000, guid: bb458b9ec5b8f2e47a852329c31907cf, type: 3}
+  - name: Hurt3
+    clip: {fileID: 8300000, guid: 29e2e2297ee510644979c7a1545ee77b, type: 3}
+  footstepList:
+  - name: Footstep1
+    clip: {fileID: 8300000, guid: f7da6001569fab54ea9c4ebd317f3d5f, type: 3}
+  - name: Footstep2
+    clip: {fileID: 8300000, guid: 69f2e454a85433f4495197e3e91c06cf, type: 3}
+  - name: Footstep3
+    clip: {fileID: 8300000, guid: 4cde21d4b514c22468863c8f4217ad32, type: 3}
+  - name: Footstep4
+    clip: {fileID: 8300000, guid: 4693b30bf53181a439bbba85b1398eb7, type: 3}
+  - name: Footstep5
+    clip: {fileID: 8300000, guid: ce2f54eb2b05d4c448ff59234dd46326, type: 3}
   sfxSource: {fileID: 903549405}
   musicSource: {fileID: 104587459}
 --- !u!4 &913929649
@@ -8148,13 +8264,14 @@ GameObject:
   - component: {fileID: 917029132}
   - component: {fileID: 917029136}
   - component: {fileID: 917029135}
-  - component: {fileID: 917029138}
   - component: {fileID: 917029137}
   - component: {fileID: 917029139}
   - component: {fileID: 917029140}
   - component: {fileID: 917029141}
   - component: {fileID: 917029142}
   - component: {fileID: 917029143}
+  - component: {fileID: 917029144}
+  - component: {fileID: 917029145}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -8446,28 +8563,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &917029138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917029127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd28756f93b32124a8733f18697ddb9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomFootstep:
-  - {fileID: 8300000, guid: f7da6001569fab54ea9c4ebd317f3d5f, type: 3}
-  - {fileID: 8300000, guid: 69f2e454a85433f4495197e3e91c06cf, type: 3}
-  - {fileID: 8300000, guid: 4cde21d4b514c22468863c8f4217ad32, type: 3}
-  - {fileID: 8300000, guid: 4693b30bf53181a439bbba85b1398eb7, type: 3}
-  - {fileID: 8300000, guid: ce2f54eb2b05d4c448ff59234dd46326, type: 3}
-  audioSource: {fileID: 917029137}
-  invokeSwordSound:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &917029139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8546,6 +8641,33 @@ MonoBehaviour:
   voiceProcessor: {fileID: 917029136}
   vosk: {fileID: 917029135}
   voiceDetected: {fileID: 997534800}
+--- !u!114 &917029144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917029127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b339c9555af758346978e22a130274c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 917029137}
+--- !u!114 &917029145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917029127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd28756f93b32124a8733f18697ddb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 917029137}
+  swordAudioSource: {fileID: 567169523}
 --- !u!1 &918963621
 GameObject:
   m_ObjectHideFlags: 0
@@ -9040,6 +9162,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 567169518}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5303d6366bcc6444d8d5d24c77d479e9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 567169523}
   m_SourcePrefab: {fileID: 100100000, guid: 5303d6366bcc6444d8d5d24c77d479e9, type: 3}
 --- !u!1 &963194225
 GameObject:
@@ -9445,6 +9571,7 @@ GameObject:
   - component: {fileID: 997534805}
   - component: {fileID: 997534804}
   - component: {fileID: 997534806}
+  - component: {fileID: 997534807}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Guard
@@ -9517,6 +9644,7 @@ MonoBehaviour:
   isAttacking: 0
   ttsScript: {fileID: 997534804}
   hurtNoise: augh
+  audioSource: {fileID: 997534797}
 --- !u!195 &997534796
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9647,28 +9775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd28756f93b32124a8733f18697ddb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomFootstep:
-  - {fileID: 8300000, guid: f7da6001569fab54ea9c4ebd317f3d5f, type: 3}
-  - {fileID: 8300000, guid: 69f2e454a85433f4495197e3e91c06cf, type: 3}
-  - {fileID: 8300000, guid: 4cde21d4b514c22468863c8f4217ad32, type: 3}
-  - {fileID: 8300000, guid: 4693b30bf53181a439bbba85b1398eb7, type: 3}
-  - {fileID: 8300000, guid: ce2f54eb2b05d4c448ff59234dd46326, type: 3}
-  audioSource: {fileID: 1157508405}
-  invokeSwordSound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1960588695}
-        m_TargetAssemblyTypeName: PlayRandomSword, Assembly-CSharp
-        m_MethodName: Sword
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  audioSource: {fileID: 997534797}
+  swordAudioSource: {fileID: 1960588698}
 --- !u!114 &997534799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9799,6 +9907,19 @@ AudioReverbFilter:
   m_LFReference: 250
   m_ReflectionsDelay: 0
   m_ReverbPreset: 22
+--- !u!114 &997534807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997534792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b339c9555af758346978e22a130274c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1157508405}
 --- !u!1001 &1004178053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11183,7 +11304,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 2.3274534, y: 1.6361797, z: -0.019437358}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -13095,7 +13216,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.0000072717667, y: 3.3714652, z: -0.00000039860606}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -15118,7 +15239,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.000006743761, y: 3.020122, z: 0.1504373}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -18590,11 +18711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788d2981559166443a37090411130c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordMissSounds:
-  - {fileID: 8300000, guid: a875651beb721b84b838f1ab2506056c, type: 3}
-  - {fileID: 8300000, guid: 6ab1b8e207073ec478dbd9b311a7dc86, type: 3}
-  - {fileID: 8300000, guid: 13415360952895c459c2a17ce826affc, type: 3}
---- !u!82 &1960588696
+--- !u!82 &1960588698
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

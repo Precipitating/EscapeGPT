@@ -45834,7 +45834,7 @@ AnimationClip:
   - time: 0.5
     functionName: Footstep
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: dd28756f93b32124a8733f18697ddb9e,
+    objectReferenceParameter: {fileID: 11500000, guid: b339c9555af758346978e22a130274c3,
       type: 3}
     floatParameter: 0
     intParameter: 0
@@ -45842,7 +45842,7 @@ AnimationClip:
   - time: 1.0666667
     functionName: Footstep
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: dd28756f93b32124a8733f18697ddb9e,
+    objectReferenceParameter: {fileID: 11500000, guid: b339c9555af758346978e22a130274c3,
       type: 3}
     floatParameter: 0
     intParameter: 0

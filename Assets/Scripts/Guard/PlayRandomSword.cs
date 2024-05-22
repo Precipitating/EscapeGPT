@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayRandomSword : MonoBehaviour
 {
     private AudioSource audioSource;
-    [SerializeField] private AudioClip[] swordMissSounds;
 
 
     private void Start()
@@ -15,7 +14,7 @@ public class PlayRandomSword : MonoBehaviour
 
     public void Sword()
     {
-        audioSource.PlayOneShot(swordMissSounds[UnityEngine.Random.Range(0, swordMissSounds.Length)]);
+        audioSource.PlayOneShot(AudioManager.instance.GetRandomClip(AudioManager.instance.swordMissList));
     }
 
 

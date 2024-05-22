@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Threading;
 using System;
 using System.Runtime.Serialization;
+using UnityEngine.SceneManagement;
 
 namespace Voxell.Speech.TTS
 {
@@ -26,6 +27,7 @@ namespace Voxell.Speech.TTS
             InitTTSInference();
         }
 
+
         void Update()
         {
             if (isPlaying && !audioSource.isPlaying)
@@ -34,7 +36,7 @@ namespace Voxell.Speech.TTS
                 isPlaying = false;
             }
 
-            if (_playAudio && !isPlaying)
+            if (_playAudio && !isPlaying && !audioSource.isPlaying)
             {
                 _audioClip = AudioClip.Create("Speak", sampleLength, 1, 22050, false);
                 _audioClip.SetData(_audioSample, 0);
@@ -45,18 +47,19 @@ namespace Voxell.Speech.TTS
 
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
-            _speakThread?.Abort();
+            _speakThread?.Join();
             Dispose();
         }
 
         public void Speak(string text)
         {
 
-            _speakThread?.Abort();
+            _speakThread?.Join();
             _speakThread = new Thread(new ParameterizedThreadStart(SpeakTask));
             _speakThread.Start(text);
+
 
 
 

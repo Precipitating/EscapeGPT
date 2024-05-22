@@ -37,7 +37,7 @@ public class CharacterAttack : MonoBehaviour
     {
         switch (val)
         {
-            case 1: isReady = false; AudioManager.instance.PlayRandom2D(AudioManager.instance.swordMissList); break;
+            case 1: isReady = false; break;
             case 2: isReady = true; playerAnimator.SetInteger("SwordAttack", 0); break;
         
         }
