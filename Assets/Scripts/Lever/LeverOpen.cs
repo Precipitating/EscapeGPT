@@ -9,6 +9,7 @@ public class LeverOpen : MonoBehaviour, InteractableInterface
 
     [SerializeField] private Animator doorAnimator = null;
     [SerializeField] private Guard guardScript;
+    [SerializeField] private AudioSource doorAudioSource;
 
     
 
@@ -20,6 +21,7 @@ public class LeverOpen : MonoBehaviour, InteractableInterface
         {
             if (!doorAnimator.GetBool("isOpen") && guardScript.GetState() == Guard.State.ATTACKING)
             {
+                doorAudioSource.PlayOneShot(AudioManager.instance.GetGlobalClip("MetalDoor"));
                 doorAnimator.Play("GateOpen");
                 doorAnimator.SetBool("isOpen",true);
                 guardScript.SetStoppingDistance(guardScript.GetAttackDistance());
@@ -44,6 +46,8 @@ public class LeverOpen : MonoBehaviour, InteractableInterface
             {
                 doorAnimator.SetBool("isOpen", true);
             }
+
+            doorAudioSource.PlayOneShot(AudioManager.instance.GetGlobalClip("MetalDoor"));
         }
 
 

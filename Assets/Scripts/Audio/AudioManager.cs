@@ -76,6 +76,25 @@ public class AudioManager : MonoBehaviour
         return result;
     }
 
+    public AudioClip GetGlobalClip(string name)
+    {
+        AudioClip result = null;
+        Sound sound = Array.Find(globalSoundList, x => x.name == name);
+
+        if (sound == null)
+        {
+            Debug.LogError("Sound not found!");
+
+        }
+        else
+        {
+            result = sound.clip;
+        }
+
+
+        return result;
+    }
+
     public AudioClip GetRandomClip(Sound[] list)
     {
         AudioClip result = null;
