@@ -65,6 +65,10 @@ public class Guard : MonoBehaviour, HumanInterface
     // for patrolling, the number represents patrol waypoints indexes in a list
     private int patrolDest = 0;
 
+    // parry
+    private bool isParried = false;
+    private bool canParry = false;
+
 
 
 
@@ -368,6 +372,16 @@ public class Guard : MonoBehaviour, HumanInterface
         agent.CalculatePath(characterPosition.position, path);
 
         return (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid);
+    }
+
+    public bool GotParried
+    {
+        get { return isParried; }
+        set { isParried = value; }
+    }  
+    public bool CanParry
+    {
+        get { return canParry; }
     }
 
 

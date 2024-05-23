@@ -29,11 +29,20 @@ public class SwordAttack : MonoBehaviour
 
                 if (attachedController.CanDamage())
                 {
-                    Debug.Log(other.tag + "Hit!");
-                    unknownController.OnHit(dmg);
+                    if (unknownController.CanParry)
+                    {
+                        Debug.Log(other.tag + "Deflected!");
+                        AudioManager.instance.PlayRandom2D(AudioManager.instance.swordClashList);
+                    }
+                    else
+                    {
+                        Debug.Log(other.tag + "Hit!");
+                        unknownController.OnHit(dmg);
 
-                    // play a random flesh cut sound effect
-                    AudioManager.instance.PlayRandom2D(AudioManager.instance.fleshCutList);
+                        // play a random flesh cut sound effect
+                        AudioManager.instance.PlayRandom2D(AudioManager.instance.fleshCutList);
+                    }
+
 
 
                     // 2 = false, animation event does not accept bool

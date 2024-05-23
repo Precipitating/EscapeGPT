@@ -4,30 +4,47 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterAttack : MonoBehaviour
+public class CharacterCombat : MonoBehaviour
 {
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Equip equipScript;
     [SerializeField] private int attackVariations = 2;
 
-    bool isReady = true;
+
+    private bool isReady = true;
+
+    private bool canParry = true;
+
 
     void Update()
     {
+        // attack
         if (Mouse.current.leftButton.wasPressedThisFrame && equipScript.IsHoldingSword())
         {
-            if (IsAnimatingAttack())
-            {
-                
+            if (IsReady())
+            {   
                 playerAnimator.SetInteger("SwordAttack", Random.Range(0, attackVariations + 1));
             }
         }
+        // deflect
+        else if (Mouse.current.rightButton.wasPressedThisFrame && 
+                 equipScript.IsHoldingSword() &&
+                 IsReady() && canParry)
+        {
+
+
+            canParry = false;
+            playerAnimator.SetTrigger("isDeflecting");
+        }
+
     }
 
 
 
-    private bool IsAnimatingAttack()
+    // true = not playing a sword slash animation
+    // false = is in the midst of animating a sword slash
+    private bool IsReady()
     {
         return isReady;
     }
@@ -42,4 +59,12 @@ public class CharacterAttack : MonoBehaviour
         
         }
     }
+
+
+    public void ResetParry()
+    {
+        canParry = true;
+    }
+
+
 }

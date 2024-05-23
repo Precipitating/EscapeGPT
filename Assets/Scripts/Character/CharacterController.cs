@@ -9,7 +9,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
 {
 
     // -- references
-    [SerializeField] int hp = 100;
+    [SerializeField] private int hp = 100;
     [SerializeField] private float animBlendSpeed = 8.9f;
 
     // camera 
@@ -26,6 +26,9 @@ public class CharacterController : MonoBehaviour, HumanInterface
     [SerializeField] private float cameraShakeIntensity = 1f;
     [SerializeField] private float cameraShakeDuration = 0.5f;
 
+    // character attack script
+    [SerializeField] private CharacterCombat characterCombat;
+
     // can damage enemies
     private bool canDamage = false;
 
@@ -33,8 +36,6 @@ public class CharacterController : MonoBehaviour, HumanInterface
     public static event Action onPlayerDead;
     [SerializeField] private float deathAnimationTime = 2f;
     bool isDead = false;
-
-
 
 
     private Rigidbody playerRigBody;
@@ -53,6 +54,13 @@ public class CharacterController : MonoBehaviour, HumanInterface
 
     // camera
     private float xRotation;
+
+    // parry
+    private bool isParried = false;
+    private bool canParry = false;
+    
+
+
 
 
 
@@ -139,6 +147,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
     // on player hit, shake camera and lower HP
     public void OnHit(int dmg)
     {
+
         AudioManager.instance.PlayRandom2D(AudioManager.instance.hurtList);
         Tween.ShakeLocalPosition(cameraRoot, new Vector3(cameraShakeIntensity, cameraShakeIntensity, cameraShakeIntensity), cameraShakeDuration);
 
@@ -157,6 +166,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
     {
         get { return hp; }
         set { hp = value; }
+
     
     }  
 
@@ -202,6 +212,20 @@ public class CharacterController : MonoBehaviour, HumanInterface
         return inputManager.Run;
     }
 
+    public bool GotParried
+    {
+        get { return isParried; }
+        set { isParried = value; }
+    } 
+    public bool CanParry
+    {
+        get { return canParry; }
+    }
+
+    public void ToggleCanParry()
+    {
+        canParry = !canParry;
+    }
 
 
 

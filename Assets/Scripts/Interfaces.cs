@@ -13,6 +13,9 @@ public interface HumanInterface
 
     bool IsRunning();
 
+    bool GotParried { get; set; }
+    bool CanParry { get;}
+
 
 
 }

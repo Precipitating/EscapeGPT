@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     // singleton
     public static AudioManager instance;
 
-    public Sound[] globalSoundList, fleshCutList, swordMissList, hurtList, footstepList;
+    public Sound[] globalSoundList, fleshCutList, swordMissList, hurtList, footstepList, swordClashList;
     public AudioSource sfxSource,musicSource;
 
     private void Awake()
