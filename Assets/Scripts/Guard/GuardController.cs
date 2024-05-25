@@ -27,6 +27,7 @@ public class Guard : MonoBehaviour, HumanInterface
 
     // transforms for guard interest points (navigation)
     [SerializeField] private Transform characterPosition;
+    [SerializeField] private CharacterController characterScript;
     [SerializeField] private Transform leverPosition;
 
     // anger value determined by player speech
@@ -191,8 +192,16 @@ public class Guard : MonoBehaviour, HumanInterface
     }
     private void Attack()
     {
-        // check if guard -> player is reachable
+        // stop attacking a dead character
+        if (characterScript.HP <= 0)
+        {
+            guardState = State.IDLE;
+            angerValue = 0;
+            return;
+        }
 
+
+        // check if guard -> player is reachable
         if (IsUnreachable())
         {
             // if not, open lever so player is reachable

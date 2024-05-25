@@ -8,6 +8,7 @@ public class SwordAttack : MonoBehaviour
     [SerializeField] private MeshRenderer renderedMesh;
     [SerializeField] private int dmg = 20;
     [SerializeField] HumanInterface attachedController;
+    [SerializeField] ParticleSystem parryEffect;
 
     private void Awake()
     {
@@ -29,10 +30,12 @@ public class SwordAttack : MonoBehaviour
 
                 if (attachedController.CanDamage())
                 {
+                    // parried
                     if (unknownController.CanParry)
                     {
                         Debug.Log(other.tag + "Deflected!");
                         AudioManager.instance.PlayRandom2D(AudioManager.instance.swordClashList);
+                        parryEffect.Play();
                     }
                     else
                     {

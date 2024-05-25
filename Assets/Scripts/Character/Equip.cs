@@ -9,7 +9,7 @@ public class Equip : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private GameObject targetObject;
+    [SerializeField] private MeshRenderer targetObject;
     
     int nextAnimToPlay = 1;
 
@@ -53,8 +53,8 @@ public class Equip : MonoBehaviour
     {
         switch (val)
         {
-            case 1: targetObject.SetActive(true); break;
-            case 2: targetObject.SetActive(false); break;
+            case 1: targetObject.enabled = true; break;
+            case 2: targetObject.enabled = false; break;
 
         }
 

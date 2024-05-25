@@ -40,8 +40,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(string name)
     {
-        sfxSource.clip = GetClip(name,globalSoundList);
-        sfxSource.Play();
+        musicSource.clip = GetClip(name,globalSoundList);
+        musicSource.Play();
 
     }
 
