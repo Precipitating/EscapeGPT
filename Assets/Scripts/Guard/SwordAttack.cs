@@ -34,6 +34,7 @@ public class SwordAttack : MonoBehaviour
                     if (unknownController.CanParry)
                     {
                         Debug.Log(other.tag + "Deflected!");
+                        attachedController.GotParried = true;
                         AudioManager.instance.PlayRandom2D(AudioManager.instance.swordClashList);
                         parryEffect.Play();
                     }

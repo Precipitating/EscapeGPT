@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using PrimeTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,9 +18,11 @@ public class Guard : MonoBehaviour, HumanInterface
         IDLE,
         PATROL,
         ATTACKING,
+        STUNNED,
         DEAD
     }
 
+    #region variables
     // get refs 
     [SerializeField] private int hp = 100;
     [SerializeField] private NavMeshAgent agent;
@@ -50,6 +54,8 @@ public class Guard : MonoBehaviour, HumanInterface
     // sound
     [SerializeField] AudioSource audioSource;
 
+    // cooldown
+    private float lastCooldown;
 
     // check if conversing
     private bool isConversing = false;
@@ -69,7 +75,11 @@ public class Guard : MonoBehaviour, HumanInterface
     // parry
     private bool isParried = false;
     private bool canParry = false;
+    private int stunnedTime = 2;
 
+
+
+    #endregion
 
 
 
@@ -121,6 +131,7 @@ public class Guard : MonoBehaviour, HumanInterface
             case State.IDLE: Setup(); break;
             case State.PATROL: Patrol(); break;
             case State.ATTACKING: Attack(); break;
+            case State.STUNNED: Stunned(); break;
             case State.DEAD: Die(); break;
         }
     }
@@ -138,7 +149,6 @@ public class Guard : MonoBehaviour, HumanInterface
         {
             if (!agent.hasPath || agent.remainingDistance < 0.1f)
             {
-               
                 TogglePatrolDest();
                 agent.SetDestination(waypoints[patrolDest].transform.position);
             }
@@ -195,8 +205,18 @@ public class Guard : MonoBehaviour, HumanInterface
         // stop attacking a dead character
         if (characterScript.HP <= 0)
         {
-            guardState = State.IDLE;
             angerValue = 0;
+            ChangeState(State.IDLE);           
+            return;
+        }
+
+        // if parried, stunned state
+        if (GotParried)
+        {
+            lastCooldown = Time.time;
+            Tween.PunchLocalPosition(transform, strength: -transform.forward, duration: 0.5f);
+            animator.Play("Stagger");
+            ChangeState(State.STUNNED);
             return;
         }
 
@@ -391,6 +411,18 @@ public class Guard : MonoBehaviour, HumanInterface
     public bool CanParry
     {
         get { return canParry; }
+    }
+
+
+    private void Stunned()
+    {
+        if (Time.time - lastCooldown < stunnedTime) return;
+        
+        isParried = false;
+        ChangeState(State.ATTACKING);
+
+
+
     }
 
 
