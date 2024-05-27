@@ -32,7 +32,6 @@ public class Guard : MonoBehaviour, HumanInterface
     // transforms for guard interest points (navigation)
     [SerializeField] private Transform characterPosition;
     [SerializeField] private CharacterController characterScript;
-    [SerializeField] private Transform leverPosition;
 
     // anger value determined by player speech
     [SerializeField] private int angerValue = 0;
@@ -53,6 +52,9 @@ public class Guard : MonoBehaviour, HumanInterface
 
     // sound
     [SerializeField] AudioSource audioSource;
+
+    // lever
+    [SerializeField] NearestLeverPoint nearestLeverPoint;
 
     // cooldown
     private float lastCooldown;
@@ -169,9 +171,8 @@ public class Guard : MonoBehaviour, HumanInterface
             // make it swap to the other patrol destination so it'll retoggle back to the original destination 
             TogglePatrolDest();
 
-            // go to the nearest valid destination towards the player
+            // go to the nearest valid converse point towards the player
             agent.SetDestination(characterPosition.position);
-            transform.LookAt(characterPosition.position);
 
             // 1 = ChatGPT deems what you said insulting
             if (chatGPTResult[0] == '|')
@@ -225,7 +226,7 @@ public class Guard : MonoBehaviour, HumanInterface
         if (IsUnreachable())
         {
             // if not, open lever so player is reachable
-            agent.destination = leverPosition.position;
+            agent.destination = nearestLeverPoint.GetNearestLeverPoint();
 
         }
         else

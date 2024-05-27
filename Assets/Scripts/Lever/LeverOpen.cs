@@ -24,6 +24,8 @@ public class LeverOpen : MonoBehaviour, InteractableInterface
                 doorAudioSource.PlayOneShot(AudioManager.instance.GetGlobalClip("MetalDoor"));
                 doorAnimator.Play("GateOpen");
                 doorAnimator.SetBool("isOpen",true);
+
+                // if open, set attack distance.
                 guardScript.SetStoppingDistance(guardScript.GetAttackDistance());
             }
         }
