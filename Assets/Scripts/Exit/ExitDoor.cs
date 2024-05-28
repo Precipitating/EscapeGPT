@@ -19,10 +19,12 @@ public class ExitDoor : MonoBehaviour, InteractableInterface
         {
             OnEscape?.Invoke();
             AudioManager.instance.PlayGlobalSFX("ExitSuccess");
+            AudioManager.instance.PlayMusic("Ambience");
         }
         else
         {
             AudioManager.instance.PlayGlobalSFX("ExitFail");
+            tts.PlayDirectly(failedEscapeLine);
         }
             
     }

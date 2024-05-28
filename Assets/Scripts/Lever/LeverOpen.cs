@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LeverOpen : MonoBehaviour, InteractableInterface
 {
-    // Start is called before the first frame update
 
     [SerializeField] private Animator doorAnimator = null;
     [SerializeField] private Guard guardScript;

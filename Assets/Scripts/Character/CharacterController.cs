@@ -156,6 +156,7 @@ public class CharacterController : MonoBehaviour, HumanInterface
         if (HP <= 0)
         {
             Die();
+
         }
 
 
@@ -175,7 +176,8 @@ public class CharacterController : MonoBehaviour, HumanInterface
         // play death animation, animation event handles death screen.
         animator.Play("Death");
         isDead = true;
-        
+        AudioManager.instance.PlayMusic("Ambience");
+
 
 
     }

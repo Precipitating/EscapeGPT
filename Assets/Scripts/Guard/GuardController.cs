@@ -83,13 +83,6 @@ public class Guard : MonoBehaviour, HumanInterface
 
     #endregion
 
-
-
-
-
-
-
-
     private void OnEnable()
     {
         // grab the guard's response
@@ -156,6 +149,10 @@ public class Guard : MonoBehaviour, HumanInterface
             }
 
         }
+        else
+        {
+            transform.LookAt(characterPosition);
+        }
 
 
 
@@ -174,12 +171,13 @@ public class Guard : MonoBehaviour, HumanInterface
             // go to the nearest valid converse point towards the player
             agent.SetDestination(characterPosition.position);
 
-            // 1 = ChatGPT deems what you said insulting
+            // | = ChatGPT deems what you said insulting
             if (chatGPTResult[0] == '|')
             {
                 // guard wants you dead, set to attack state
                 if (angerValue >= maxAnger)
                 {
+                    AudioManager.instance.PlayMusic("Chased");
                     ChangeState(State.ATTACKING);
                     agent.speed *= 2;
 
@@ -376,6 +374,9 @@ public class Guard : MonoBehaviour, HumanInterface
         {
             Debug.Log("Guard does not have ToggleRagdoll script added in!");
         }
+
+        // back to ambience, chased music should dissipate.
+        AudioManager.instance.PlayMusic("Ambience");
     }
 
     public bool IsRunning()
